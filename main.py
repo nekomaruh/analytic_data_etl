@@ -4,13 +4,11 @@ import re
 
 
 df = pd.read_excel("moviedata.xlsx")
-cant_datos = df['director_name'].count()
+data_len = df['director_name'].count()
 
 no_data = 'UNKNOWN'
 
-
-
-def limpiarColor(input):
+def cleanColor(input):
     input = str(input)
     input = input.lstrip()
     if 'nan' in input:
@@ -19,7 +17,7 @@ def limpiarColor(input):
         input = no_data
     return input
 
-def limpiarNombre(input):
+def cleanName(input):
     input = str(input)
     if '#NODATA' in input:
         return no_data
@@ -29,7 +27,7 @@ def limpiarNombre(input):
         return no_data
     return input.encode("latin-1", 'ignore').decode("utf-8", 'ignore')
 
-def limpiarDigito(input):
+def cleanDigit(input):
     input = str(input)
     if 'nan' in input:
         return 0
@@ -39,7 +37,7 @@ def limpiarDigito(input):
         return 0
     return int(float(input))
 
-def limpiarDecimal(input):
+def cleanDecimal(input):
     input = str(input)
     if 'nan' in input:
         return 0
@@ -76,14 +74,67 @@ aspect_ratio = df['aspect_ratio']
 movie_facebook_likes = df['movie_facebook_likes']
 
 # Filtros
-f_colors = []
+f_color = []
+f_director_name = []
+f_num_critic_for_reviews = []
+f_duration = []
+f_director_facebook_likes = []
+f_actor_3_facebook_likes = []
+f_actor_2_name = []
+f_actor_1_facebook_likes = []
+f_gross = []
+f_genres = []
+f_actor_1_name = []
+f_movie_title = []
+f_num_voted_users = []
+f_cast_total_facebook_likes = []
+f_actor_3_name = []
+f_facenumber_in_poster = []
+f_plot_keywords = []
+f_movie_imdb_link = []
+f_num_user_for_reviews = []
+f_language = []
+f_country = []
+f_content_rating = []
+f_budget = []
+f_title_year = []
+f_actor_2_facebook_likes = []
+f_imdb_score = []
+f_aspect_ratio = []
+f_movie_facebook_likes = []
 
+for i in range(data_len):
+    f_color.append(cleanColor(color[i]))
+    f_director_name.append(cleanName(director_name[i]))
+    f_num_critic_for_reviews.append(cleanDigit(num_critic_for_reviews[i]))
+    f_duration.append(cleanDigit(duration[i]))
+    f_director_facebook_likes.append(cleanDigit(director_facebook_likes[i]))
+    f_actor_3_facebook_likes.append(cleanDigit(actor_3_facebook_likes[i]))
+    f_actor_2_name.append(cleanName(actor_2_name[i]))
+    f_actor_1_facebook_likes.append(cleanDigit(actor_1_facebook_likes[i]))
+    f_gross.append(cleanDigit(gross[i]))
+    f_genres.append(genres[i]) # No se limpia
+    f_actor_1_name.append(cleanName(actor_1_name[i]))
+    f_movie_title.append(cleanName(movie_title[i]))
+    f_num_voted_users.append(num_voted_users[i]) # No se limpia
+    f_cast_total_facebook_likes.append(cast_total_facebook_likes) # No se limpia
+    f_actor_3_name.append(cleanName(actor_3_name[i]))
+    f_facenumber_in_poster.append(cleanDigit(facenumber_in_poster[i]))
+    f_plot_keywords.append(cleanName(plot_keywords[i]))
+    f_movie_imdb_link.append(movie_imdb_link[i]) # No se limpia
+    f_num_user_for_reviews.append(cleanDigit(num_user_for_reviews[i]))
+    f_language.append(language[i]) # No se limpia
+    f_country.append(country[i]) # No se limpia
+    f_content_rating.append(content_rating[i]) # No se limpia
+    f_budget.append(budget[i]) # No se limpia
+    f_title_year.append(title_year[i]) # No se limpia
+    f_actor_2_facebook_likes.append(cleanDigit(actor_2_facebook_likes[i]))
+    f_imdb_score.append(imdb_score[i]) # No se limpia
+    f_aspect_ratio.append(cleanDecimal(aspect_ratio[i]))
+    f_movie_facebook_likes.append(movie_facebook_likes[i]) # No se limpia
 
-
-for i in range(cant_datos):
-    f_color = limpiarColor(color[i])
-    print(f_color)
-    #f_colors.append(f_color)
+    #f_color = limpiarColor(color[i])
+    #print(f_color)
     
     #f_director = limpiarNombre(director_name[i])
     #print(f_director)
@@ -140,7 +191,7 @@ for i in range(cant_datos):
     # La columna budget no se limpia
     # La columna title_year no se limpia
 
-    #f_a2fl = limpiarDigito(actor_3_facebook_likes[i]) # Vacios
+    #f_a2fl = limpiarDigito(actor_2_facebook_likes[i]) # Vacios
     #print(f_a2fl)
 
     # La columna imdb_score no se limpia
@@ -156,12 +207,9 @@ for i in range(cant_datos):
 
 
     
+print('No se cayó')
 
+# Tabla color
+table_color = list(set(f_color))
+print(table_color)
 
-"""
-for i in range(len(actor_1_facebook_likes)):
-    actor = str(actor_3_name[i])
-    if actor == ' ':
-        print("vacio")
-
-"""
