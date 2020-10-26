@@ -203,13 +203,22 @@ for i in range(data_len):
     #print(0)
 
 
-
-
-
-    
 print('No se cayó')
 
-# Tabla color
+# Table color
 table_color = list(set(f_color))
-print(table_color)
+print('Colors\n',table_color)
 
+# Table genre
+table_genre = list(set(f_genres))
+print('Genre\n',table_genre)
+
+# Table plot keywords
+table_plot_keywords = list(set(f_plot_keywords))
+print('Plot keywords\n',table_plot_keywords)
+
+# Table content rating
+table_content_rating = list(set(f_content_rating))
+print('Content rating\n',table_content_rating)
+
+# Table 
