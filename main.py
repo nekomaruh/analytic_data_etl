@@ -107,7 +107,7 @@ f_imdb_score = []
 f_aspect_ratio = []
 f_movie_facebook_likes = []
 
-# Filter
+# Filter (Ver cuanto tiempo se demora en filtrar)
 for i in range(data_len):
     f_color.append(cleanColor(color[i]))
     f_director_name.append(cleanName(director_name[i]))
@@ -171,7 +171,6 @@ df['movie_facebook_likes'] = f_movie_facebook_likes
 
 # Modify values from tables (num_voted_users & cast_total_facebook_likes)
 list_imdb = list(set(f_movie_imdb_link))
-print('len table_movies:',len(list_imdb))
 
 sum_num_voted_users = [0]*len(list_imdb)
 sum_cast_total_facebook_likes= [0]*len(list_imdb)
@@ -182,7 +181,7 @@ count_cast_total_facebook_likes= [0]*len(list_imdb)
 avg_num_voted_users = [0]*len(list_imdb)
 avg_cast_total_facebook_likes = [0]*len(list_imdb)
 
-# Calculate average
+# Calculate average (Ver cuanto tiempo se demora en calcular el promedio)
 for x in range(data_len):
     imdb = f_movie_imdb_link[x]
     for y in range(len(list_imdb)):
@@ -193,7 +192,7 @@ for x in range(data_len):
             count_cast_total_facebook_likes[y] +=1
             break
 
-# Agregamos los promedios a la lista
+# Agregamos los promedios a la lista (ver cuanto tiempo demora pasar las foreign keys)
 for i in range(len(list_imdb)):
     cvu = count_num_voted_users[i]
     cctfl = count_cast_total_facebook_likes[i]
@@ -214,7 +213,6 @@ df.reset_index(drop=True, inplace=True)
 df['num_voted_users'] = avg_num_voted_users
 df['cast_total_facebook_likes'] = avg_cast_total_facebook_likes
 
-#print(list_imdb)
 print('Datos origniales:',data_len)
 print('Datos filtrados:',len(list_imdb))
 
@@ -263,13 +261,11 @@ df_actors = pd.concat(frames_actors)
 df_actors.drop_duplicates(subset ="actor", inplace = True)
 df_actors.reset_index(drop=True, inplace=True)
 
-print(df_actors)
-
 actor1 = df_movie['actor_1_name']
 actor2 = df_movie['actor_2_name']
 actor3 = df_movie['actor_3_name']
 
-
+# Agregamos todos los actores sin  a la tabla (Esta es la parte que mas demora)
 for x in range(len(list_imdb)):
     r1_actor = actor1[x]
     r2_actor = actor2[x]
@@ -336,5 +332,6 @@ def saveMovies():
     file.write(line)
     file.close()
 
-
-saveMovies()
+# Exportar datos
+#saveActors()
+#saveMovies()
