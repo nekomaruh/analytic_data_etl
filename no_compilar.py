@@ -24,6 +24,7 @@ def cleanName(input):
         return no_data
     if '?' in input:
         return no_data
+    #string = string.replace(u'\xa0', u' ')
     return input.encode("latin-1", 'ignore').decode("utf-8", 'ignore').replace(u'\xa0', u'').strip()
 
 def cleanMovie(input):
@@ -107,7 +108,6 @@ f_imdb_score = []
 f_aspect_ratio = []
 f_movie_facebook_likes = []
 
-# Filter
 for i in range(data_len):
     f_color.append(cleanColor(color[i]))
     f_director_name.append(cleanName(director_name[i]))
@@ -122,7 +122,7 @@ for i in range(data_len):
     f_actor_1_name.append(cleanName(actor_1_name[i]))
     f_movie_title.append(cleanName(movie_title[i]))
     f_num_voted_users.append(num_voted_users[i]) # No se limpia
-    f_cast_total_facebook_likes.append(cast_total_facebook_likes[i]) # No se limpia
+    f_cast_total_facebook_likes.append(cast_total_facebook_likes) # No se limpia
     f_actor_3_name.append(cleanName(actor_3_name[i]))
     f_facenumber_in_poster.append(cleanDigit(facenumber_in_poster[i]))
     f_plot_keywords.append(cleanName(plot_keywords[i]))
@@ -138,8 +138,96 @@ for i in range(data_len):
     f_aspect_ratio.append(cleanDecimal(aspect_ratio[i]))
     f_movie_facebook_likes.append(movie_facebook_likes[i]) # No se limpia
 
+    #f_color = limpiarColor(color[i])
+    #print(f_color)
+    
+    #f_director = limpiarNombre(director_name[i])
+    #print(f_director)
 
-# Replace filtered data
+    #f_ncfr = limpiarDigito(num_critic_for_reviews[i])
+    #print(f_ncfr)
+
+    #f_duration = limpiarDigito(duration[i])
+    #print(f_duration)
+
+    #f_dfl = limpiarDigito(director_facebook_likes[i])
+    #print(f_dfl)
+
+    #f_a3fl = limpiarDigito(actor_3_facebook_likes[i])
+    #print(f_a3fl)
+
+    #f_a2n = limpiarNombre(actor_2_name[i])
+    #print(f_a2n)
+
+    #f_a1fl = limpiarDigito(actor_1_facebook_likes[i])
+    #print(f_a1fl)
+
+    #f_gross = limpiarDigito(gross[i])
+    #print(f_gross)
+
+    # La columna genres no se limpia
+
+    #f_a1n = limpiarNombre(actor_1_name[i])
+    #print(f_a1n)
+
+    #f_mt = cleanName(movie_title[i])
+    #print(f_mt)
+
+    # La columna num_voted_users no se limpia
+    # La columna cast_total_facebook_likes no se limpia
+    
+    #f_a3n = limpiarNombre(actor_3_name[i])
+    #print(f_a3n)
+
+    #f_fip = limpiarDigito(facenumber_in_poster[i])
+    #print(f_fip)
+
+    #f_pk = limpiarNombre(plot_keywords[i])
+    #print(f_pk)
+
+    # La columna movie_imdb_link no se limpia
+
+    #f_nufr = limpiarDigito(num_user_for_reviews[i])
+    #print(f_nufr)
+
+    # La columna language no se limpia
+    # La columna country no se limpia
+    # La columa content_rating no se limpia
+    # La columna budget no se limpia
+    # La columna title_year no se limpia
+
+    #f_a2fl = limpiarDigito(actor_2_facebook_likes[i]) # Vacios
+    #print(f_a2fl)
+
+    # La columna imdb_score no se limpia
+    
+    #f_ar = limpiarDecimal(aspect_ratio[i]) # Vacios
+    #print(f_ar)
+
+    # La columna movie_facebook_likes no se limpia
+    #print(0)
+
+
+"""
+print('No se cayó')
+
+# Table color
+table_color = list(set(f_color))
+print('Colors\n',table_color)
+
+# Table genre
+table_genre = list(set(f_genres))
+print('Genre\n',table_genre)
+
+# Table plot keywords
+table_plot_keywords = list(set(f_plot_keywords))
+print('Plot keywords\n',table_plot_keywords)
+
+# Table content rating
+table_content_rating = list(set(f_content_rating))
+print('Content rating\n',table_content_rating)
+"""
+# Save filtered data
 df['color'] = f_color
 df['director_name'] = f_director_name
 df['num_critic_for_reviews'] = f_num_critic_for_reviews
@@ -170,23 +258,23 @@ df['aspect_ratio'] = f_aspect_ratio
 df['movie_facebook_likes'] = f_movie_facebook_likes
 
 # Modify values from tables (num_voted_users & cast_total_facebook_likes)
-list_imdb = list(set(f_movie_imdb_link))
-print('len table_movies:',len(list_imdb))
+table_movies = list(set(f_movie_title))
+print('len table_movies:',len(table_movies))
 
-sum_num_voted_users = [0]*len(list_imdb)
-sum_cast_total_facebook_likes= [0]*len(list_imdb)
+sum_num_voted_users = [0]*len(table_movies)
+sum_cast_total_facebook_likes= [0]*len(table_movies)
 
-count_num_voted_users = [0]*len(list_imdb)
-count_cast_total_facebook_likes= [0]*len(list_imdb)
+count_num_voted_users = [0]*len(table_movies)
+count_cast_total_facebook_likes= [0]*len(table_movies)
 
-avg_num_voted_users = [0]*len(list_imdb)
-avg_cast_total_facebook_likes = [0]*len(list_imdb)
+avg_num_voted_users = [0]*len(table_movies)
+avg_cast_total_facebook_likes = [0]*len(table_movies)
 
 # Calculate average
 for x in range(data_len):
-    imdb = f_movie_imdb_link[x]
-    for y in range(len(list_imdb)):
-        if imdb == list_imdb[y]:
+    movie = f_movie_title[x]
+    for y in range(len(table_movies)):
+        if movie == table_movies[y]:
             sum_num_voted_users[y] += f_num_voted_users[x]
             sum_cast_total_facebook_likes[y] += f_cast_total_facebook_likes[x]
             count_num_voted_users[y] += 1
@@ -194,7 +282,7 @@ for x in range(data_len):
             break
 
 # Agregamos los promedios a la lista
-for i in range(len(list_imdb)):
+for i in range(len(table_movies)):
     cvu = count_num_voted_users[i]
     cctfl = count_cast_total_facebook_likes[i]
     if cvu != 0:
@@ -207,132 +295,83 @@ for i in range(len(list_imdb)):
         avg_cast_total_facebook_likes[i] = 0
 
 # Reduce dataframe
-df.drop_duplicates(subset ="movie_imdb_link", inplace = True)
-df.reset_index(drop=True, inplace=True)
+df.drop_duplicates(subset ="movie_title", inplace = True)
 
 # Replace average columns
 df['num_voted_users'] = avg_num_voted_users
 df['cast_total_facebook_likes'] = avg_cast_total_facebook_likes
 
-#print(list_imdb)
-
 
 # ----- CREATE DATAFRAMES FOR DB ------
 
-# Table movie
-df_movie = df.copy()
+# Table colors
+df_color = df.filter(['color'], axis=1)
+df_color.drop_duplicates(subset ="color", inplace = True)
+df_color.reset_index(drop=True, inplace=True)
+#print(df_color)
 
-del df_movie['actor_1_facebook_likes']
-del df_movie['actor_2_facebook_likes']
-del df_movie['actor_3_facebook_likes']
+# Table director
+df_director_name = df.filter(['director_name'], axis=1)
+df_director_name.drop_duplicates(subset ="director_name", inplace = True)
+df_director_name.reset_index(drop=True, inplace=True)
 
-# Table actors
-df_actors1 = df.copy()
-df_actors1= df.filter([
-    'actor_1_facebook_likes',
-    'actor_1_name'], axis=1)
+# Table country
+df_country = df.filter(['country'], axis=1)
+df_country.drop_duplicates(subset ="country", inplace = True)
+df_country.reset_index(drop=True, inplace=True)
 
-df_actors1.drop_duplicates(subset ="actor_1_name", inplace = True)
-df_actors1.reset_index(drop=True, inplace=True)
+# Table genres
+df_genres = df.filter(['genres'], axis=1)
+df_genres.drop_duplicates(subset ="genres", inplace = True)
+df_genres.reset_index(drop=True, inplace=True)
 
-df_actors2 = df.copy()
-df_actors2= df.filter([
-    'actor_2_facebook_likes',
-    'actor_2_name'], axis=1)
+# Table reviews
+df_reviews = df.filter(['num_critic_for_reviews', 'num_user_for_reviews'], axis=1)
 
-df_actors2.drop_duplicates(subset ="actor_2_name", inplace = True)
-df_actors2.reset_index(drop=True, inplace=True)
+# Table plot keywords
+df_plot_keywords = df.filter(['plot_keywords'], axis=1)
+df_plot_keywords.drop_duplicates(subset ="plot_keywords", inplace = True)
+df_plot_keywords.reset_index(drop=True, inplace=True)
+print(df_plot_keywords)
 
-df_actors3 = df.copy()
-df_actors3= df.filter([
-    'actor_3_facebook_likes',
-    'actor_3_name'], axis=1)
-
-df_actors3.drop_duplicates(subset ="actor_3_name", inplace = True)
-df_actors3.reset_index(drop=True, inplace=True)
-
-df_actors1 = df_actors1.rename(columns = {'actor_1_name': 'actor', 'actor_1_facebook_likes': 'likes'}, inplace = False)
-df_actors2 = df_actors2.rename(columns = {'actor_2_name': 'actor', 'actor_2_facebook_likes': 'likes'}, inplace = False)
-df_actors3 = df_actors3.rename(columns = {'actor_3_name': 'actor', 'actor_3_facebook_likes': 'likes'}, inplace = False)
-
-frames_actors = [df_actors1, df_actors2, df_actors3]
-
-df_actors = pd.concat(frames_actors)
-df_actors.drop_duplicates(subset ="actor", inplace = True)
-df_actors.reset_index(drop=True, inplace=True)
-
-print(df_actors)
-
-actor1 = df_movie['actor_1_name']
-actor2 = df_movie['actor_2_name']
-actor3 = df_movie['actor_3_name']
+# Table content_rating
+df_content_rating= df.filter(['content_rating'], axis=1)
+df_content_rating.drop_duplicates(subset ="content_rating", inplace = True)
+df_content_rating.reset_index(drop=True, inplace=True)
+#print(df_content_rating)
 
 
-for x in range(len(list_imdb)):
-    r1_actor = actor1[x]
-    r2_actor = actor2[x]
-    r3_actor = actor3[x]
+# Create dataframe for movies
+df_movies = df.filter(['movie_title','budget','title_year','country','genres','plot_keywords'], axis=1)
+df_movies.reset_index(drop=True, inplace=True)
+df_movies = df_movies.rename(columns = {'country': 'id_country', 'genres': 'id_genres', 'plot_keywords': 'id_keywords'}, inplace = False)
 
-    for y in range(len(df_actors)):
-        if df_actors['actor'][y] == r1_actor:
-            actor1[x] = y
+print(df_movies)
+for x in range(len(df_movies)):
+
+    # Set index for country
+    for y in range(len(df_country)):
+        if df_country['country'][y] == df_movies['id_country'][x]:
+            df_movies['id_country'][x] = y
             break
     
-    for y in range(len(df_actors)):
-        if df_actors['actor'][y] == r2_actor:
-            actor2[x] = y
-            break
-    
-    for y in range(len(df_actors)):
-        if df_actors['actor'][y] == r3_actor:
-            actor3[x] = y
+    # Set index for genres
+    for y in range(len(df_genres)):
+        if df_genres['genres'][y] == df_movies['id_genres'][x]:
+            df_movies['id_genres'][x] = y
             break
 
-df_movie['actor_1_name'] = actor1
-df_movie['actor_2_name'] = actor2
-df_movie['actor_3_name'] = actor3
+    # Set index for reviews (get from movie index)
 
-# Export actors.txt
-def saveActors():
-    file = open('actors.txt', 'w')
-    line = ""
-    for i in range(len(df_actors)):
-        line += str(i)+","+str(df_actors['actor'][i])+","+str(df_actors['likes'][i])+"\n"
-    file.write(line)
-    file.close()
-
-# Export movies.txt
-def saveMovies():
-    file = open('movies.txt', 'w')
-    line = ""
-    for i in range(len(df_movie)):
-        line += str(df_movie['movie_imdb_link'][i]) + ','
-        line += str(df_movie['movie_title'][i])+","
-        line += str(df_movie['director_name'][i])+","
-        line += str(df_movie['color'][i])+","
-        line += str(df_movie['num_critic_for_reviews'][i])+','
-        line += str(df_movie['duration'][i])+','
-        line += str(df_movie['director_facebook_likes'][i])+","
-        line += str(df_movie['gross'][i])+","
-        line += str(df_movie['num_voted_users'][i])+","
-        line += str(df_movie['cast_total_facebook_likes'][i])+","
-        line += str(df_movie['facenumber_in_poster'][i])+","
-        line += str(df_movie['plot_keywords'][i])+","
-        line += str(df_movie['genres'][i])+","
-        line += str(df_movie['num_user_for_reviews'][i])+","
-        line += str(df_movie['language'][i])+","
-        line += str(df_movie['country'][i])+","
-        line += str(df_movie['aspect_ratio'][i])+","
-        line += str(df_movie['imdb_score'][i])+","
-        line += str(df_movie['movie_facebook_likes'][i])+","
-        line += str(df_movie['title_year'][i])+","
-        line += str(df_movie['budget'][i])+","
-        line += str(df_movie['content_rating'][i])+","
-        line += str(df_movie['actor_1_name'][i])+","
-        line += str(df_movie['actor_2_name'][i])+","
-        line += str(df_movie['actor_3_name'][i])+"\n"
-    file.write(line)
-    file.close()
+    # Set index for keywords
+    for y in range(len(df_plot_keywords)):
+        if df_plot_keywords['plot_keywords'][y] == df_movies['id_keywords'][x]:
+            df_movies['id_keywords'][x] = y
+            break
 
 
-saveMovies()
+print(df_movies)
+"""
+for i in range(len(df_movies)):
+    print(df_movies['country'][i])
+"""
