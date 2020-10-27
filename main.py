@@ -215,6 +215,8 @@ df['num_voted_users'] = avg_num_voted_users
 df['cast_total_facebook_likes'] = avg_cast_total_facebook_likes
 
 #print(list_imdb)
+print('Datos origniales:',data_len)
+print('Datos filtrados:',len(list_imdb))
 
 
 # ----- CREATE DATAFRAMES FOR DB ------
