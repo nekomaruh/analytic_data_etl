@@ -3,10 +3,11 @@ import numpy as np
 import re
 
 df = pd.read_excel("sies.xlsx")
-data_len = df['director_name'].count()
+df_len = df['CODIGO UNICO DE CARRERA'].count()
 
-no_data = 'UNKNOWN'
+no_data = '-'
 
+"""
 def cleanColor(input):
     input = str(input)
     input = input.lstrip()
@@ -46,7 +47,52 @@ def cleanDecimal(input):
     if 'nan' in input:
         return 0
     return float(input)
+"""
 
+def cleanDigit(input):
+    input = str(input)
+    if 'nan' in input:
+        return None
+    if 's/i' in input:
+        return None
+    if '-' in input:
+        return 0
+    return int(float(input))
+
+def cleanCareer(input):
+    input = str(input)
+    if 'nan' in input:
+        return None
+    return input
+    
+
+# Eliminar la columna de tipo institucion
+df = df.drop(columns=['TIPO DE INSTITUCION'])
+
+# Eliminar filas para hacer pruebas
+#df = df[:-20900]
+#a = df.iloc[:,5].tolist()
+aa = df["ARANCEL ANUAL"].tolist()
+ct = df["COSTO TITULACION"].tolist()
+nc = df["NIVEL CARRERA O TIPO DE CARRERA"].tolist()
+
+for i in range(len(aa)):
+    xaa = cleanDigit(aa[i])
+    xct = cleanDigit(ct[i])
+    xnc = cleanCareer(nc[i])
+
+# Asignar los valores filtrados al dataframe
+df["ARANCEL ANUAL"] = aa
+df["COSTO TITULACION"] = ct
+df["NIVEL CARRERA O TIPO DE CARRERA"] = nc
+
+
+print(df["NIVEL CARRERA O TIPO DE CARRERA"])
+
+
+
+
+"""
 # Datos
 color = df['color']
 director_name = df['director_name']
@@ -335,3 +381,5 @@ def saveMovies():
 # Exportar datos
 #saveActors()
 #saveMovies()
+
+"""
