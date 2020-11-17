@@ -322,6 +322,7 @@ def saveMatricula():
     file = open('matricula.sies', 'w')
     line = ""
     for i in range(len(df_matricula)):
+        line += str(i)+','
         line += str(df_matricula['PROMEDIO NEM EN MATRICULA'][i])+','
         line += str(df_matricula['CODIGO DE INSTITUCIÓN'][i])+','
         line += str(df_matricula['PROMEDIO PSU EN MATRICULA 1ER AÑO'][i])+','
