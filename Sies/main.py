@@ -8,7 +8,7 @@ start_time = time.time()
 df = pd.read_excel("sies.xlsx")
 df_len = df['CODIGO UNICO DE CARRERA'].count()
 
-no_data =  None
+no_data =  'nan'
 
 def cleanDigit(input):
     input = str(input)
@@ -41,6 +41,8 @@ def cleanDecimal(input):
     if '-' in input:
         return no_data
     if 's/i' in input:
+        return no_data
+    if input == ' ':
         return no_data
     return float(input)
 
@@ -133,6 +135,7 @@ for i in range(len(aa)):
     
     
 # Asignar las columnas filtradas al dataframe
+
 df["ARANCEL ANUAL"] = aa
 df["COSTO TITULACION"] = ct
 df["NIVEL CARRERA O TIPO DE CARRERA"] = nc
@@ -167,8 +170,7 @@ df["Ingreso promedio al 4° año de titulación"] = ip4t
 
 df["Área Carrera Genérica"] = acg
 
-#print(df["NIVEL CARRERA O TIPO DE CARRERA"])
-
+# Crear nuevos frames
 
 df_titulados = df[['AÑO TITULADOS', 
                    'TITULADOS MASCULINO',
@@ -221,7 +223,6 @@ df_matricula = df[['PROMEDIO NEM EN MATRICULA',
                    '% COBERTURA MIN',
                    '% COBERTURA MAX']].copy()
 
-
 df_titulados.drop_duplicates(subset="CODIGO UNICO DE CARRERA", inplace=True)
 df_titulados.reset_index(drop=True, inplace=True)
 
@@ -245,7 +246,6 @@ df_matricula.drop_duplicates(['CODIGO DE INSTITUCIÓN',
                               'MATRÍCULA - % DE PARTICULAR PAGADO',
                               'C. Administración Delegada'], keep='last')
 df_matricula.reset_index(drop=True, inplace=True)
-
 
 def saveTitulados():
     file = open('titulados.sies', 'w')
