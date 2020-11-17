@@ -5,90 +5,162 @@ import re
 df = pd.read_excel("sies.xlsx")
 df_len = df['CODIGO UNICO DE CARRERA'].count()
 
-no_data = '-'
-
-"""
-def cleanColor(input):
-    input = str(input)
-    input = input.lstrip()
-    if 'nan' in input:
-        input = no_data
-    if '#ERROR' in input:
-        input = no_data
-    return input
-
-def cleanName(input):
-    input = str(input)
-    if '#NODATA' in input:
-        return no_data
-    if 'nan' in input:
-        return no_data
-    if '?' in input:
-        return no_data
-    return input.encode("latin-1", 'ignore').decode("utf-8", 'ignore').replace(u'\xa0', u'').strip()
-
-def cleanMovie(input):
-    input = str(input)
-    input = input[:-1]
-    return input
+no_data =  None
 
 def cleanDigit(input):
     input = str(input)
+    if '-' in input:
+        return 0
     if 'nan' in input:
-        return 0
-    if '#NODATA' in input:
-        return 0
-    if 'N/I' in input:
-        return 0
+        return no_data
+    if 's/i' in input:
+        return no_data
     return int(float(input))
+
+def cleanText(input):
+    input = str(input)
+    if 'nan' in input:
+        return no_data
+    if 's/i' in input:
+        return no_data
+    return input
+
+def cleanPercentages(input):
+    input = str(input)
+    if 'nan' in input:
+        return no_data
+    return 0
 
 def cleanDecimal(input):
     input = str(input)
     if 'nan' in input:
-        return 0
-    return float(input)
-"""
-
-def cleanDigit(input):
-    input = str(input)
-    if 'nan' in input:
-        return None
-    if 's/i' in input:
-        return None
+        return no_data
     if '-' in input:
-        return 0
-    return int(float(input))
+        return no_data
+    if 's/i' in input:
+        return no_data
+    return float(input)
 
-def cleanCareer(input):
+def cleanPCobertura(input):
     input = str(input)
-    if 'nan' in input:
-        return None
-    return input
+    if '-' in input:
+        return no_data
+    input = input.replace("% <= X <",",")
+    input = input.replace("=","")
+    input = input.rstrip('%')
+    values = input.split(',')
+    return int(values[0])
     
 
-# Eliminar la columna de tipo institucion
-df = df.drop(columns=['TIPO DE INSTITUCION'])
+# Eliminar las columnas que no se van a utilizar
+df = df.drop(columns=['TIPO DE INSTITUCION','TOTAL MATRICULA','TOTAL MATRICULA 1ER AÑO','TOTAL TITULADOS'])
 
 # Eliminar filas para hacer pruebas
-#df = df[:-20900]
+df = df[:-20900]
 #a = df.iloc[:,5].tolist()
+
+# Generar una instanciacion de las columnas a modificar
 aa = df["ARANCEL ANUAL"].tolist()
 ct = df["COSTO TITULACION"].tolist()
 nc = df["NIVEL CARRERA O TIPO DE CARRERA"].tolist()
 
-for i in range(len(aa)):
-    xaa = cleanDigit(aa[i])
-    xct = cleanDigit(ct[i])
-    xnc = cleanCareer(nc[i])
+am = df["AÑO MATRÍCULA"].tolist()
+tmf = df["TOTAL MATRICULA FEMENINO"].tolist()
+tmm = df["TOTAL MATRICULA MASCULINO"].tolist()
+m1f = df["MATRICULA DE 1ER AÑO FEMENINO"].tolist()
+m1m = df["MATRICULA 1ER AÑO MASCULINO"].tolist()
 
-# Asignar los valores filtrados al dataframe
+pmm = df["MATRÍCULA - % DE MUNICIPAL"].tolist()
+pmps = df["MATRÍCULA - % DE PARTICULAR SUBVENCIONADO"].tolist()
+pmpp = df["MATRÍCULA - % DE PARTICULAR PAGADO"].tolist()
+cad = df["C. Administración Delegada"].tolist()
+
+tf = df["TITULADOS FEMENINO"].tolist()
+tm = df["TITULADOS MASCULINO"].tolist()
+
+pcpsum1 = df["% DE COBERTURA PSU EN MATRICULA 1ER AÑO "].tolist()
+
+ppsum1 = df["PROMEDIO PSU EN MATRICULA 1ER AÑO"].tolist()
+pnemm = df["PROMEDIO NEM EN MATRICULA"].tolist()
+
+v1s = df["VACANTES 1ER SEMESTRE"].tolist()
+
+r1a = df["Retención de 1er año"].tolist()
+drs = df["Duración real (semestres)"].tolist()
+e1a = df["Empleabilidad al 1er año"].tolist()
+ip4t = df["Ingreso promedio al 4° año de titulación"].tolist()
+
+acg = df["Área Carrera Genérica"].tolist()
+
+for i in range(len(aa)):
+    aa[i] = cleanDigit(aa[i])
+    ct[i] = cleanDigit(ct[i])
+    nc[i] = cleanText(nc[i])
+    
+    am[i] = cleanDigit(am[i])
+    tmf[i] = cleanDigit(tmf[i])
+    tmm[i] = cleanDigit(tmm[i])
+    m1f[i] = cleanDigit(m1f[i])
+    m1m[i] = cleanDigit(m1m[i])
+    
+    pmm[i] = cleanDecimal(pmm[i])
+    pmps[i] = cleanDecimal(pmps[i])
+    pmpp[i] = cleanDecimal(pmpp[i])
+    cad[i] = cleanDecimal(cad[i])
+    
+    tf[i] = cleanDigit(tf[i])
+    tm[i] = cleanDigit(tm[i])
+    
+    pcpsum1[i] = cleanPCobertura(pcpsum1[i])
+    
+    ppsum1[i] = cleanDecimal(ppsum1[i])
+    pnemm[i] = cleanDecimal(pnemm[i])
+    
+    v1s[i] = cleanDigit(v1s[i])
+    
+    r1a[i] = cleanDecimal(r1a[i])
+    drs[i] = cleanDecimal(drs[i])
+    e1a[i] = cleanDecimal(e1a[i])
+    ip4t[i] = cleanText(ip4t[i])
+    
+    acg[i] = cleanText(acg[i])
+    
+    
+# Asignar las columnas filtradas al dataframe
 df["ARANCEL ANUAL"] = aa
 df["COSTO TITULACION"] = ct
 df["NIVEL CARRERA O TIPO DE CARRERA"] = nc
 
+df["AÑO MATRÍCULA"] = am
+df["TOTAL MATRICULA FEMENINO"] = tmf
+df["TOTAL MATRICULA MASCULINO"] = tmm
+df["MATRICULA DE 1ER AÑO FEMENINO"] = m1f
+df["MATRICULA 1ER AÑO MASCULINO"] = m1m
 
-print(df["NIVEL CARRERA O TIPO DE CARRERA"])
+df["MATRÍCULA - % DE MUNICIPAL"] = pmm
+df["MATRÍCULA - % DE PARTICULAR SUBVENCIONADO"] = pmps
+df["MATRÍCULA - % DE PARTICULAR PAGADO"] = pmpp
+df["C. Administración Delegada"] = cad
 
+df["TITULADOS FEMENINO"] = tf
+df["TITULADOS MASCULINO"] = tm
+
+df["% DE COBERTURA PSU EN MATRICULA 1ER AÑO "] = pcpsum1
+
+df["PROMEDIO PSU EN MATRICULA 1ER AÑO"] = ppsum1
+df["PROMEDIO NEM EN MATRICULA"] = pnemm
+
+df["VACANTES 1ER SEMESTRE"] = v1s
+
+df["Retención de 1er año"] = r1a
+df["Duración real (semestres)"] = drs
+df["Empleabilidad al 1er año"] = e1a
+df["Ingreso promedio al 4° año de titulación"] = ip4t
+
+df["Área Carrera Genérica"] = acg
+
+#print(df["NIVEL CARRERA O TIPO DE CARRERA"])
+print(drs)
 
 
 
