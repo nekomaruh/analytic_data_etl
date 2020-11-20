@@ -1,6 +1,9 @@
 import pandas as pd
 import numpy as np
 import re
+import time
+
+start_time = time.time()
 
 df = pd.read_excel("moviedata.xlsx")
 data_len = df['director_name'].count()
@@ -333,5 +336,8 @@ def saveMovies():
     file.close()
 
 # Exportar datos
-#saveActors()
-#saveMovies()
+saveActors()
+saveMovies()
+
+# Medimos el tiempo que se demoró en ejecutar el código
+print("El código se compiló en %s segundos" % (time.time() - start_time))
