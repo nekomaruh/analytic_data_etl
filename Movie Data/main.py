@@ -32,6 +32,7 @@ def cleanName(input):
 def cleanMovie(input):
     input = str(input)
     input = input[:-1]
+    input = input.replace(',','.')
     return input
 
 def cleanDigit(input):
@@ -123,7 +124,7 @@ for i in range(data_len):
     f_gross.append(cleanDigit(gross[i]))
     f_genres.append(genres[i]) # No se limpia
     f_actor_1_name.append(cleanName(actor_1_name[i]))
-    f_movie_title.append(cleanName(movie_title[i]))
+    f_movie_title.append(cleanMovie(movie_title[i]))
     f_num_voted_users.append(num_voted_users[i]) # No se limpia
     f_cast_total_facebook_likes.append(cast_total_facebook_likes[i]) # No se limpia
     f_actor_3_name.append(cleanName(actor_3_name[i]))
