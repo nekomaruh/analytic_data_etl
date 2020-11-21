@@ -50,7 +50,7 @@ def leerActores():
 
 
 def leerMovie():
-    archivo = open("/Movie Data/movies.txt","r")
+    archivo = open("Movie Data/movies.txt","r")
     linea = archivo.readline().strip()
     while linea != "":
         partes = linea.split(",")
