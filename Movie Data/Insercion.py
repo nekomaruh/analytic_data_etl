@@ -54,6 +54,7 @@ def leerMovie():
     linea = archivo.readline().strip()
     while linea != "":
         partes = linea.split(",")
+        
         insertarMovie(partes[0],partes[1],partes[2],partes[3],partes[4],partes[5],partes[6],partes[7],partes[8],partes[9],partes[10],partes[11],partes[12],partes[13],partes[14],partes[15],partes[16],partes[17],partes[18],partes[19],partes[20],partes[21],partes[22],partes[23],partes[24])
         
         linea = archivo.readline().strip()
@@ -63,7 +64,7 @@ def leerMovie():
 print("Recien empezara")
 print("-----------------------------")
 inicial = datetime.now()
-leerMovie()
+leerActores()
 final = datetime.now()
 total = final - inicial
 segundos = total.seconds
