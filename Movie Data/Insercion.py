@@ -26,13 +26,13 @@ def insertarActor(acName, fcLikes):
 def insertarMovie(link,title,dirName,color,numCrit,duration,dirFcLikes,gross,numVotUser,castTotFcLikes,faceNumber,plotKeyWords,genres,numUserRev,lang,country,aspectR,imdbScore,fcLikes,titleYear,budget,contRating,idAc1,idAc2,idAc3):
     connection = connect()
     cursor = connection.cursor()
-    sql = "INSERT INTO movie(movielink,movietitle,directorname,color,numcrit,duration,direcfclikes,gross,numvotuser,cattotfclikes,facenumber,plotkeywords,genres,numuserreviews,languag,country,aspectratio,imdbscore,fclikes,titleyear,budget,cotrating,idactor1,idactor2,idactor3) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s,%s,%s )"
-    values = (link,title,dirName,color,numCrit,duration,dirFcLikes,gross,numVotUser,castTotFcLikes,faceNumber,plotKeyWords,genres,numUserRev,lang,country,aspectR,imdbScore,fcLikes,titleYear,budget,contRating)
+    sql = "INSERT INTO movie(movielink,movietitle,directorname,color,numcrit,duration,direcfclikes,gross,numvotuser,cattotfclikes,facenumber,plotkeywords,genres,numuserreviews,languag,country,aspectratio,imdbscore,fclikes,titleyear,budget,cotrating,idactor1,idactor2,idactor3) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s,%s,%s)"
+    values = (link,title,dirName,color,numCrit,duration,dirFcLikes,gross,numVotUser,castTotFcLikes,faceNumber,plotKeyWords,genres,numUserRev,lang,country,aspectR,imdbScore,fcLikes,titleYear,budget,contRating,idAc1,idAc2,idAc3)
     cursor.execute(sql, values)
     connection.commit()
 
 
-insertarActor('Leonel Villagra',1900)
+
 
 
 
@@ -63,7 +63,7 @@ def leerMovie():
 print("Recien empezara")
 print("-----------------------------")
 inicial = datetime.now()
-leerActores()
+leerMovie()
 final = datetime.now()
 total = final - inicial
 segundos = total.seconds
