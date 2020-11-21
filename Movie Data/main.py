@@ -33,7 +33,7 @@ def cleanMovie(input):
     input = str(input)
     input = input[:-1]
     input = input.replace(',','.')
-    return input
+    return input.encode("latin-1", 'ignore').decode("utf-8", 'ignore').replace(u'\xa0', u'').strip()
 
 def cleanDigit(input):
     input = str(input)
