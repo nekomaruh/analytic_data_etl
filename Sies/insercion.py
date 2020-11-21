@@ -179,9 +179,11 @@ def leerCarreraSede():
 
 
 print("Recien empezara")
+print("-----------------------------")
 inicial = datetime.now()
 leerCarreras()
 final = datetime.now()
 total = final - inicial
 segundos = total.seconds
 print("EXITO! con un tiempo de "+ str(segundos)+" segundos")
+print("-----------------------------")
