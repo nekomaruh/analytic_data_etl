@@ -12,6 +12,8 @@ no_data =  'nan'
 
 def cleanDigit(input):
     input = str(input)
+    if not input:
+        return 0
     if '-' in input:
         return 0
     if 'nan' in input:
@@ -22,6 +24,8 @@ def cleanDigit(input):
 
 def cleanText(input):
     input = str(input)
+    if ',' in input:
+        input = input.replace(',','.')
     if 'nan' in input:
         return no_data
     if 's/i' in input:
@@ -30,12 +34,16 @@ def cleanText(input):
 
 def cleanPercentages(input):
     input = str(input)
+    if not input:
+        return 0
     if 'nan' in input:
         return no_data
     return 0
 
 def cleanDecimal(input):
     input = str(input)
+    if not input:
+        return 0.0
     if 'nan' in input:
         return no_data
     if '-' in input:
@@ -67,6 +75,7 @@ df = df.drop(columns=['TIPO DE INSTITUCION', 'AÑO_DURAC', 'TOTAL MATRICULA','TO
 aa = df["ARANCEL ANUAL"].tolist()
 ct = df["COSTO TITULACION"].tolist()
 nc = df["NIVEL CARRERA O TIPO DE CARRERA"].tolist()
+nca = df["NOMBRE CARRERA"].tolist()
 
 am = df["AÑO MATRÍCULA"].tolist()
 tmf = df["TOTAL MATRICULA FEMENINO"].tolist()
@@ -102,6 +111,7 @@ for i in range(len(aa)):
     aa[i] = cleanDigit(aa[i])
     ct[i] = cleanDigit(ct[i])
     nc[i] = cleanText(nc[i])
+    nca[i] = cleanText(nca[i])
     
     am[i] = cleanDigit(am[i])
     tmf[i] = cleanDigit(tmf[i])
@@ -139,6 +149,7 @@ for i in range(len(aa)):
 df["ARANCEL ANUAL"] = aa
 df["COSTO TITULACION"] = ct
 df["NIVEL CARRERA O TIPO DE CARRERA"] = nc
+df["NOMBRE CARRERA"] = nca
 
 df["AÑO MATRÍCULA"] = am
 df["TOTAL MATRICULA FEMENINO"] = tmf

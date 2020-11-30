@@ -1,12 +1,12 @@
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 import psycopg2 as pg
 import os
 from datetime import datetime
 
-load_dotenv()
+#load_dotenv()
 
 
-connection = pg.connect(host = 'localhost', user = 'postgres', database = 'DataBaseSIES', password = 'postgres')
+connection = pg.connect(host = 'localhost', user = 'postgres', database = 'SIES', password = 'postgres')
 
 
 
@@ -74,7 +74,7 @@ def cambioAString(valor):
 
 
 def leerCarreras():
-    archivo = open("Sies/carreras.sies","r")
+    archivo = open("carreras.sies","r")
     linea = archivo.readline().strip()
     while linea != "":
         partes = linea.split(",")
@@ -117,7 +117,7 @@ def leerCarreras():
 
 
 def leerInstitucion():
-    archivo = open("Sies/institucion.sies","r")
+    archivo = open("institucion.sies","r")
     linea = archivo.readline().strip()
     while linea != "":
         partes = linea.split(",")
@@ -130,7 +130,7 @@ def leerInstitucion():
 
 
 def leerMatricula():
-    archivo = open("Sies/matricula.sies","r")
+    archivo = open("matricula.sies","r")
     linea = archivo.readline().strip()
     while linea != "":
         partes = linea.split(",")
@@ -139,7 +139,7 @@ def leerMatricula():
     leerCarreraSede()
 
 def leerSedes():
-    archivo = open("Sies/sedes.sies","r")
+    archivo = open("sedes.sies","r")
     linea = archivo.readline().strip()
     while linea != "":
         partes = linea.split(",")
@@ -153,7 +153,7 @@ def leerSedes():
 
 
 def leerTitulados():
-    archivo = open("Sies/titulados.sies","r")
+    archivo = open("titulados.sies","r")
     linea = archivo.readline().strip()
     while linea != "":
         partes = linea.split(",")
@@ -167,7 +167,7 @@ def leerTitulados():
 
 
 def leerCarreraSede():
-    archivo = open("Sies/carrera_sedes.sies","r")
+    archivo = open("carrera_sedes.sies","r")
     linea = archivo.readline().strip()
     while linea != "":
         partes = linea.split(",")
