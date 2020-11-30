@@ -371,7 +371,7 @@ engine = sqlalchemy.create_engine('postgresql://postgres:postgres@localhost:5432
 #df_sede.set_index('SEDE', inplace=False)
 df_sede.to_sql('sedes',engine,if_exists='replace',index=False)
 
-df_institucion.to_sql('sedes',engine,if_exists='replace',index=False)
-df_titulados.to_sql('sedes',engine,if_exists='replace',index=False)
+df_institucion.to_sql('institucion',engine,if_exists='replace',index=False)
+df_titulados.to_sql('titulados',engine,if_exists='replace',index=False)
 
 
