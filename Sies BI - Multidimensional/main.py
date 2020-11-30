@@ -10,7 +10,7 @@ start_time = time.time()
 df = pd.read_excel("sies.xlsx")
 df_len = df['CODIGO UNICO DE CARRERA'].count()
 
-no_data =  'nan'
+no_data =  '-'
 
 def cleanDigit(input):
     input = str(input)
@@ -19,9 +19,11 @@ def cleanDigit(input):
     if '-' in input:
         return 0
     if 'nan' in input:
-        return no_data
+        return 0
     if 's/i' in input:
-        return no_data
+        return 0
+    if input:
+        return 0
     return int(float(input))
 
 def cleanText(input):
@@ -37,34 +39,52 @@ def cleanText(input):
 def cleanPercentages(input):
     input = str(input)
     if not input:
-        return 0
+        return 0.0
     if 'nan' in input:
-        return no_data
-    return 0
+        return 0.0
+    if 'N/A' in input:
+        return 0.0
+    if 'NULL' in input:
+        return 0.0
+    return float(input)
 
 def cleanDecimal(input):
     input = str(input)
     if not input:
         return 0.0
     if 'nan' in input:
-        return no_data
+        return 0.0
     if '-' in input:
-        return no_data
+        return 0.0
     if 's/i' in input:
-        return no_data
+        return 0.0
     if input == ' ':
-        return no_data
+        return 0.0
     return float(input)
 
 def cleanPCobertura(input):
     input = str(input)
     if '-' in input:
-        return no_data, no_data
+        return 0.0, 0.0
     input = input.replace("% <= X <",",")
     input = input.replace("=","")
     input = input.rstrip('%')
     values = input.split(',')
     return int(values[0]), int(values[1])
+
+def cleanDuracionRealSemestres(input):
+    input = str(input)
+    if 'nan' in input:
+        return 0.0
+    if '-' in input:
+        return 0.0
+    if 's/i' in input:
+        return 0.0
+    if not input:
+        return 0.0
+    return float(input)
+
+
 
 # Eliminar las columnas que no se van a utilizar
 df = df.drop(columns=['TIPO DE INSTITUCION', 'AÑO_DURAC', 'TOTAL MATRICULA','TOTAL MATRICULA 1ER AÑO','TOTAL TITULADOS'])
@@ -121,7 +141,7 @@ for i in range(len(aa)):
     m1f[i] = cleanDigit(m1f[i])
     m1m[i] = cleanDigit(m1m[i])
     
-    pmm[i] = cleanDecimal(pmm[i])
+    pmm[i] = cleanPercentages(pmm[i])
     pmps[i] = cleanDecimal(pmps[i])
     pmpp[i] = cleanDecimal(pmpp[i])
     cad[i] = cleanDecimal(cad[i])
@@ -139,7 +159,7 @@ for i in range(len(aa)):
     v1s[i] = cleanDigit(v1s[i])
     
     r1a[i] = cleanDecimal(r1a[i])
-    drs[i] = cleanDecimal(drs[i])
+    drs[i] = cleanDuracionRealSemestres(drs[i])
     e1a[i] = cleanDecimal(e1a[i])
     ip4t[i] = cleanText(ip4t[i])
     
@@ -198,7 +218,7 @@ df_carrera = df[['CODIGO UNICO DE CARRERA',
                  'DURACION CARRERA FORMAL',
                  'NIVEL CARRERA O TIPO DE CARRERA',
                  'Retención de 1er año',
-                 'Duración real (semestres)',
+                 #"Duración real (semestres)",
                  'Empleabilidad al 1er año',
                  'Ingreso promedio al 4° año de titulación',
                  'CODIGO DE INSTITUCIÓN']].copy()
@@ -215,7 +235,7 @@ df_carrera_sede = df[['CODIGO UNICO DE CARRERA',
                       'VACANTES 1ER SEMESTRE',
                       'TOTAL MATRICULA FEMENINO',
                       'TOTAL MATRICULA MASCULINO',
-                      'AÑO_INFORM']]
+                      'AÑO_INFORM']].copy()
 
 df_sede = df[['SEDE', 
               'CODIGO DE INSTITUCIÓN',
@@ -229,12 +249,13 @@ df_matricula = df[['PROMEDIO NEM EN MATRICULA',
                    'CODIGO DE INSTITUCIÓN',
                    'PROMEDIO PSU EN MATRICULA 1ER AÑO',
                    'AÑO MATRÍCULA',
-                   'MATRÍCULA - % DE MUNICIPAL',
-                   'MATRÍCULA - % DE PARTICULAR SUBVENCIONADO',
-                   'MATRÍCULA - % DE PARTICULAR PAGADO',
+                   #'MATRÍCULA - % DE MUNICIPAL',
+                   #'MATRÍCULA - % DE PARTICULAR SUBVENCIONADO',
+                   #'MATRÍCULA - % DE PARTICULAR PAGADO',
                    'C. Administración Delegada',
-                   '% COBERTURA MIN',
-                   '% COBERTURA MAX']].copy()
+                   #'% COBERTURA MIN',
+                   #'% COBERTURA MAX'
+                   ]].copy()
 
 df_titulados.drop_duplicates(subset="CODIGO UNICO DE CARRERA", inplace=True)
 df_titulados.reset_index(drop=True, inplace=True)
@@ -251,6 +272,7 @@ df_carrera_sede.reset_index(drop=True, inplace=True)
 df_institucion.drop_duplicates(subset="CODIGO DE INSTITUCIÓN", inplace=True)
 df_institucion.reset_index(drop=True, inplace=True)
 
+"""
 df_matricula.drop_duplicates(['CODIGO DE INSTITUCIÓN',
                               'PROMEDIO NEM EN MATRICULA',
                               'AÑO MATRÍCULA',
@@ -258,105 +280,8 @@ df_matricula.drop_duplicates(['CODIGO DE INSTITUCIÓN',
                               'MATRÍCULA - % DE PARTICULAR SUBVENCIONADO',
                               'MATRÍCULA - % DE PARTICULAR PAGADO',
                               'C. Administración Delegada'], keep='last')
-df_matricula.reset_index(drop=True, inplace=True)
-
 """
-def saveTitulados():
-    file = open('titulados.sies', 'w')
-    line = ""
-    for i in range(len(df_titulados)):
-        line += str(i)+','
-        line += str(df_titulados['AÑO TITULADOS'][i])+','
-        line += str(df_titulados['TITULADOS MASCULINO'][i])+","
-        line += str(df_titulados['TITULADOS FEMENINO'][i])+","
-        line += str(df_titulados['CODIGO UNICO DE CARRERA'][i])+"\n"
-    file.write(line)
-    file.close()
-
-def saveCarreras():
-    file = open('carreras.sies', 'w')
-    line = ""
-    for i in range(len(df_carrera)):
-        line += str(df_carrera['CODIGO UNICO DE CARRERA'][i])+','
-        line += str(df_carrera['NOMBRE CARRERA'][i])+","
-        line += str(df_carrera['ARANCEL ANUAL'][i])+","
-        line += str(df_carrera['COSTO TITULACION'][i])+","
-        line += str(df_carrera['AREA DE CONOCIMIENTO'][i])+","
-        line += str(df_carrera['DURACION CARRERA FORMAL'][i])+","
-        line += str(df_carrera['NIVEL CARRERA O TIPO DE CARRERA'][i])+","
-        line += str(df_carrera['Retención de 1er año'][i])+","
-        line += str(df_carrera['Duración real (semestres)'][i])+","
-        line += str(df_carrera['Empleabilidad al 1er año'][i])+","
-        line += str(df_carrera['Ingreso promedio al 4° año de titulación'][i])+","
-        line += str(df_carrera['CODIGO DE INSTITUCIÓN'][i])+"\n"
-    file.write(line)
-    file.close()
-    
-def saveSedes():
-    file = open('sedes.sies', 'w')
-    line = ""
-    for i in range(len(df_sede)):
-        line += str(df_sede['SEDE'][i])+','
-        line += str(df_sede['CODIGO DE INSTITUCIÓN'][i])+","
-        line += str(df_sede['JORNADA'][i])+","
-        line += str(df_sede['REGION'][i])+"\n"
-    file.write(line)
-    file.close()
-    
-def saveCarreraSedes():
-    file = open('carrera_sedes.sies', 'w')
-    line = ""
-    for i in range(len(df_carrera_sede)):
-        line += str(df_carrera_sede['SEDE'][i])+','
-        line += str(df_carrera_sede['CODIGO UNICO DE CARRERA'][i])+","
-        line += str(df_carrera_sede['PSU PONDERACION NOTAS EM'][i])+","
-        line += str(df_carrera_sede['PSU PONDERACION RANKING'][i])+","
-        line += str(df_carrera_sede['PSU PONDERACION LENGUAJE'][i])+","
-        line += str(df_carrera_sede['PSU PONDERACION MATEMATICAS'][i])+","
-        line += str(df_carrera_sede['PSU PONDERACION HISTORIA'][i])+","
-        line += str(df_carrera_sede['PSU PONDERACION CIENCIAS'][i])+","
-        line += str(df_carrera_sede['PSU PONDERACION OTROS'][i])+","
-        line += str(df_carrera_sede['VACANTES 1ER SEMESTRE'][i])+","
-        line += str(df_carrera_sede['TOTAL MATRICULA FEMENINO'][i])+","
-        line += str(df_carrera_sede['TOTAL MATRICULA MASCULINO'][i])+","
-        line += str(df_carrera_sede['AÑO_INFORM'][i])+"\n"
-    file.write(line)
-    file.close()
-    
-def saveInstitucion():
-    file = open('institucion.sies', 'w')
-    line = ""
-    for i in range(len(df_institucion)):
-        line += str(df_institucion['CODIGO DE INSTITUCIÓN'][i])+','
-        line += str(df_institucion['INSTITUCION'][i])+"\n"
-    file.write(line)
-    file.close()
-    
-def saveMatricula():
-    file = open('matricula.sies', 'w')
-    line = ""
-    for i in range(len(df_matricula)):
-        line += str(i)+','
-        line += str(df_matricula['PROMEDIO NEM EN MATRICULA'][i])+','
-        line += str(df_matricula['CODIGO DE INSTITUCIÓN'][i])+','
-        line += str(df_matricula['PROMEDIO PSU EN MATRICULA 1ER AÑO'][i])+','
-        line += str(df_matricula['AÑO MATRÍCULA'][i])+','
-        line += str(df_matricula['MATRÍCULA - % DE MUNICIPAL'][i])+','
-        line += str(df_matricula['MATRÍCULA - % DE PARTICULAR SUBVENCIONADO'][i])+','
-        line += str(df_matricula['MATRÍCULA - % DE PARTICULAR PAGADO'][i])+','
-        line += str(df_matricula['C. Administración Delegada'][i])+','
-        line += str(df_matricula['% COBERTURA MIN'][i])+','
-        line += str(df_matricula['% COBERTURA MAX'][i])+"\n"
-    file.write(line)
-    file.close()
-
-# Exportar datos
-saveTitulados()
-saveCarreras()
-saveSedes()
-saveCarreraSedes()
-saveInstitucion()
-saveMatricula()
+df_matricula.reset_index(drop=True, inplace=True)
 
 # Medimos el tiempo que se demoró en ejecutar el código
 print("El código se compiló en %s segundos" % (time.time() - start_time))
@@ -365,13 +290,16 @@ print("El código se compiló en %s segundos" % (time.time() - start_time))
 html_sede = df_sede.to_html("df_SEDE.html")
 html_institucion = df_institucion.to_html("df_INSTITUCION.html")
 html_titulados = df_titulados.to_html("df_TITULADOS.html")
+html_matricula = df_matricula.to_html("df_MATRICULA.html")
+html_carrera = df_carrera.to_html("df_CARRERA.html")
 
 engine = sqlalchemy.create_engine('postgresql://postgres:postgres@localhost:5432/SIES_MULTI')
 #df_sede.to_sql('sedes',engine)
 #df_sede.set_index('SEDE', inplace=False)
-df_sede.to_sql('sedes',engine,if_exists='replace',index=False)
+#df_sede.to_sql('sedes',engine,if_exists='replace',index=False)
 
-df_institucion.to_sql('institucion',engine,if_exists='replace',index=False)
-df_titulados.to_sql('titulados',engine,if_exists='replace',index=False)
+#df_institucion.to_sql('institucion',engine,if_exists='replace',index=False)
+#df_titulados.to_sql('titulados',engine,if_exists='replace',index=False)
+df_matricula.to_sql('matricula',engine,if_exists='replace',index=False)
 
-
+#df_carrera.to_sql('carrera',engine,if_exists='replace',index=False)
