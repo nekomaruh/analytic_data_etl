@@ -285,7 +285,7 @@ df_matricula.reset_index(drop=True, inplace=True)
 
 # Medimos el tiempo que se demoró en ejecutar el código
 print("El código se compiló en %s segundos" % (time.time() - start_time))
-"""
+
 
 html_sede = df_sede.to_html("df_SEDE.html")
 html_institucion = df_institucion.to_html("df_INSTITUCION.html")
