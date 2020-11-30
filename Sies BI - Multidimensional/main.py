@@ -1,4 +1,6 @@
 import pandas as pd
+import sqlalchemy
+import psycopg2
 import numpy as np
 import re
 import time
@@ -258,6 +260,7 @@ df_matricula.drop_duplicates(['CODIGO DE INSTITUCIÓN',
                               'C. Administración Delegada'], keep='last')
 df_matricula.reset_index(drop=True, inplace=True)
 
+"""
 def saveTitulados():
     file = open('titulados.sies', 'w')
     line = ""
@@ -357,3 +360,18 @@ saveMatricula()
 
 # Medimos el tiempo que se demoró en ejecutar el código
 print("El código se compiló en %s segundos" % (time.time() - start_time))
+"""
+
+html_sede = df_sede.to_html("df_SEDE.html")
+html_institucion = df_institucion.to_html("df_INSTITUCION.html")
+html_titulados = df_titulados.to_html("df_TITULADOS.html")
+
+engine = sqlalchemy.create_engine('postgresql://postgres:postgres@localhost:5432/SIES_MULTI')
+#df_sede.to_sql('sedes',engine)
+#df_sede.set_index('SEDE', inplace=False)
+df_sede.to_sql('sedes',engine,if_exists='replace',index=False)
+
+df_institucion.to_sql('sedes',engine,if_exists='replace',index=False)
+df_titulados.to_sql('sedes',engine,if_exists='replace',index=False)
+
+
