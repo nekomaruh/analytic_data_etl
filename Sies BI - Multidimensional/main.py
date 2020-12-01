@@ -84,6 +84,9 @@ def cleanDuracionRealSemestres(input):
         return 0.0
     return float(input)
 
+var_time = time.time() - start_time
+print("La declaración de variables y funciones se tardó %s segundos" % var_time)
+
 # Eliminar las columnas que no se van a utilizar
 df = df.drop(columns=['TIPO DE INSTITUCION', 'AÑO_DURAC', 'TOTAL MATRICULA','TOTAL MATRICULA 1ER AÑO','TOTAL TITULADOS'])
 
@@ -296,9 +299,10 @@ hecho_inscripcion_matricula.drop_duplicates(["CODIGO UNICO DE CARRERA","SEDE","C
 hecho_inscripcion_matricula.reset_index(drop=True, inplace=True)
 
 # Medimos el tiempo que se demoró en ejecutar el código
-print("La limpieza se tardó %s segundos" % (time.time() - start_time))
+lim_time = time.time() - start_time
+print("La limpieza se tardó %s segundos" % lim_time)
 
-
+# Exportamos archivos html para ver si las tablas están bien
 html_institucion = dim_institucion.to_html("df_INSTITUCION.html")
 html_sede = dim_sede.to_html("df_SEDE.html")
 html_carrera = dim_carrera.to_html("df_CARRERA.html")
@@ -308,7 +312,10 @@ html_ponderaciones = dim_ponderaciones.to_html("df_PONDERACIONES.html")
 html_porcentajes = dim_porcentajes.to_html("df_PORCENTAJES.html")
 html_matricula = hecho_inscripcion_matricula.to_html("df_MATRICULA.html")
 
+html_time = time.time() - start_time
+print("La exportación de datos en HTML tardó %s segundos" % html_time)
 
+# Exportamos hacia la base de datos en postgres
 engine = sqlalchemy.create_engine('postgresql://postgres:postgres@localhost:5432/SIES_MULTI')
 dim_institucion.to_sql('dim_institucion',engine,if_exists='replace',index=False)
 dim_sede.to_sql('dim_sede',engine,if_exists='replace',index=False)
@@ -319,11 +326,11 @@ dim_ponderaciones.to_sql('dim_ponderaciones',engine,if_exists='replace',index=Fa
 dim_porcentajes.to_sql('dim_porcentajes',engine,if_exists='replace',index=False)
 hecho_inscripcion_matricula.to_sql('hecho_inscripcion_matricula',engine,if_exists='replace',index=False)
 
+db_time = time.time() - start_time
+print("La subida a la base de datos demoró %s segundos" % db_time)
 
+# Calculamos el tiempo final de compilanción en multidimensional
 print("El código se compiló en %s segundos" % (time.time() - start_time))
-
-
-
 
 
 # El resto es la mejora para la relacional
