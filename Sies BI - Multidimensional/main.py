@@ -84,14 +84,8 @@ def cleanDuracionRealSemestres(input):
         return 0.0
     return float(input)
 
-
-
 # Eliminar las columnas que no se van a utilizar
 df = df.drop(columns=['TIPO DE INSTITUCION', 'AÑO_DURAC', 'TOTAL MATRICULA','TOTAL MATRICULA 1ER AÑO','TOTAL TITULADOS'])
-
-# Eliminar filas para hacer pruebas
-#df = df[:-20920]
-#a = df.iloc[:,5].tolist()
 
 # Generar una instanciacion de las columnas a modificar
 aa = df["ARANCEL ANUAL"].tolist()
@@ -211,7 +205,6 @@ df = df.rename(columns={'MATRÍCULA - % DE PARTICULAR PAGADO': 'MATRÍCULA - p. 
 df = df.rename(columns={'% COBERTURA MIN': 'p. COBERTURA MIN'})
 df = df.rename(columns={'% COBERTURA MAX': 'p. COBERTURA MAX'})
 
-
 # Creamos los nuevos dataframes a exportar
 dim_institucion = df[['CODIGO DE INSTITUCIÓN',
                      'INSTITUCION']].copy()
@@ -234,6 +227,7 @@ dim_carrera = df[['CODIGO UNICO DE CARRERA',
                 ]].copy()
 
 dim_primer_ano = df[[
+        'CODIGO UNICO DE CARRERA',
         'MATRICULA DE 1ER AÑO FEMENINO',
         'MATRICULA 1ER AÑO MASCULINO',
         'PROMEDIO PSU EN MATRICULA 1ER AÑO',
@@ -248,7 +242,9 @@ dim_titulados = df[['AÑO TITULADOS',
                    'TITULADOS FEMENINO',
                    'CODIGO UNICO DE CARRERA']].copy()
 
-dim_ponderaciones = df[['PSU PONDERACION NOTAS EM',
+dim_ponderaciones = df[[
+                    'CODIGO UNICO DE CARRERA', 
+                    'PSU PONDERACION NOTAS EM',
                       'PSU PONDERACION RANKING',
                       'PSU PONDERACION LENGUAJE',
                       'PSU PONDERACION MATEMATICAS',
@@ -265,8 +261,8 @@ dim_porcentajes = df[[
     ]].copy()
 
 hecho_inscripcion_matricula = df[[
+    'CODIGO UNICO DE CARRERA', 
     'SEDE', 
-    'ID_PORCENTAJE',
     'CODIGO DE INSTITUCIÓN',
     'PROMEDIO NEM EN MATRICULA',
     'VACANTES 1ER SEMESTRE',
@@ -275,6 +271,58 @@ hecho_inscripcion_matricula = df[[
     'AÑO MATRÍCULA',
     'AÑO_INFORM'
      ]].copy()
+
+# Eliminamos duplicados
+
+dim_institucion.drop_duplicates(subset="CODIGO DE INSTITUCIÓN", inplace=True)
+dim_institucion.reset_index(drop=True, inplace=True)
+
+dim_sede.drop_duplicates(subset="SEDE", inplace=True)
+dim_sede.reset_index(drop=True, inplace=True)
+
+dim_carrera.drop_duplicates(['CODIGO UNICO DE CARRERA'], keep='last')
+dim_carrera.reset_index(drop=True, inplace=True)
+
+dim_titulados.drop_duplicates(['CODIGO UNICO DE CARRERA','AÑO TITULADOS'], inplace=True)
+dim_titulados.reset_index(drop=True, inplace=True)
+
+dim_primer_ano.drop_duplicates(['CODIGO UNICO DE CARRERA'], inplace=True)
+dim_primer_ano.reset_index(drop=True, inplace=True)
+
+dim_carrera.drop_duplicates(subset="CODIGO UNICO DE CARRERA", inplace=True)
+dim_carrera.reset_index(drop=True, inplace=True)
+
+hecho_inscripcion_matricula.drop_duplicates(["CODIGO UNICO DE CARRERA","SEDE","CODIGO DE INSTITUCIÓN","AÑO MATRÍCULA"], inplace=True)
+hecho_inscripcion_matricula.reset_index(drop=True, inplace=True)
+
+# Medimos el tiempo que se demoró en ejecutar el código
+print("La limpieza se tardó %s segundos" % (time.time() - start_time))
+
+
+html_institucion = dim_institucion.to_html("df_INSTITUCION.html")
+html_sede = dim_sede.to_html("df_SEDE.html")
+html_carrera = dim_carrera.to_html("df_CARRERA.html")
+html_1_ano = dim_primer_ano.to_html("df_1_ANO.html")
+html_titulados = dim_titulados.to_html("df_TITULADOS.html")
+html_ponderaciones = dim_ponderaciones.to_html("df_PONDERACIONES.html")
+html_porcentajes = dim_porcentajes.to_html("df_PORCENTAJES.html")
+html_matricula = hecho_inscripcion_matricula.to_html("df_MATRICULA.html")
+
+
+engine = sqlalchemy.create_engine('postgresql://postgres:postgres@localhost:5432/SIES_MULTI')
+dim_institucion.to_sql('dim_institucion',engine,if_exists='replace',index=False)
+dim_sede.to_sql('dim_sede',engine,if_exists='replace',index=False)
+dim_carrera.to_sql('dim_carrera',engine,if_exists='replace',index=False)
+dim_primer_ano.to_sql('dim_1_ano',engine,if_exists='replace',index=False)
+dim_titulados.to_sql('dim_titulados',engine,if_exists='replace',index=False)
+dim_ponderaciones.to_sql('dim_ponderaciones',engine,if_exists='replace',index=False)
+dim_porcentajes.to_sql('dim_porcentajes',engine,if_exists='replace',index=False)
+hecho_inscripcion_matricula.to_sql('hecho_inscripcion_matricula',engine,if_exists='replace',index=False)
+
+
+print("El código se compiló en %s segundos" % (time.time() - start_time))
+
+
 
 
 

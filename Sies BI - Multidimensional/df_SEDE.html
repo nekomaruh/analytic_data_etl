@@ -1,0 +1,696 @@
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>SEDE</th>
+      <th>JORNADA</th>
+      <th>REGION</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CASA CENTRAL (OSORNO)</td>
+      <td>Diurno</td>
+      <td>Región de los Lagos</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>SEDE PUERTO MONTT</td>
+      <td>Diurno</td>
+      <td>Región de los Lagos</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>SEDE CASTRO</td>
+      <td>Diurno</td>
+      <td>Región de los Lagos</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CASA CENTRAL (PUNTA ARENAS)</td>
+      <td>Vespertino</td>
+      <td>Región de Magallanes</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CASA CENTRAL (SANTIAGO)</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>SEDE LA SERENA</td>
+      <td>Diurno</td>
+      <td>Región de Coquimbo</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>SEDE VALPARAISO</td>
+      <td>Diurno</td>
+      <td>Región de Valparaíso</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>SEDE CHILLAN</td>
+      <td>Diurno</td>
+      <td>Región del Bío-Bío</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>SEDE CONCEPCION - TALCAHUANO</td>
+      <td>Diurno</td>
+      <td>Región del Bío-Bío</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>SEDE APOQUINDO</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>CASA CENTRAL (VIÑA DEL MAR)</td>
+      <td>Diurno</td>
+      <td>Región de Valparaíso</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>IT SEDE TALCAHUANO</td>
+      <td>Diurno</td>
+      <td>Región del Bío-Bío</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>IT SEDE CAÑETE</td>
+      <td>Diurno</td>
+      <td>Región del Bío-Bío</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>IT SEDE CHILLAN</td>
+      <td>Diurno</td>
+      <td>Región del Bío-Bío</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>IT SEDE LOS ANGELES</td>
+      <td>Diurno</td>
+      <td>Región del Bío-Bío</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>CAMPUS ORIENTE</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>CAMPUS PROVIDENCIA</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>CAMPUS SANTIAGO CENTRO</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>CASA CENTRAL (CONCEPCION)</td>
+      <td>Diurno</td>
+      <td>Región del Bío-Bío</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>SEDE ANTOFAGASTA</td>
+      <td>Diurno</td>
+      <td>Región de Antofagasta</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>CASA CENTRAL (SANTIAGO - PROVIDENCIA)</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>CASA CENTRAL</td>
+      <td>Diurno</td>
+      <td>Región de los Ríos</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>CASA CENTRAL (IQUIQUE)</td>
+      <td>Vespertino</td>
+      <td>Región de Tarapacá</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>SEDE CALAMA</td>
+      <td>Vespertino</td>
+      <td>Región de Antofagasta</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>SEDE VICTORIA</td>
+      <td>Vespertino</td>
+      <td>Región de la Araucanía</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>CASA CENTRAL (TEMUCO)</td>
+      <td>Diurno</td>
+      <td>Región de la Araucanía</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>SEDE TALCA</td>
+      <td>Diurno</td>
+      <td>Región del Maule</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>SEDE SANTIAGO</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>CASA CENTRAL (CHILLAN)</td>
+      <td>Diurno</td>
+      <td>Región del Bío-Bío</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>SEDE ANCUD</td>
+      <td>Diurno</td>
+      <td>Región de los Lagos</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>CAMPUS LA FLORIDA</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>CAMPUS MAIPU</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>SEDE CONCEPCION</td>
+      <td>Diurno</td>
+      <td>Región del Bío-Bío</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>SEDE VIÑA DEL MAR</td>
+      <td>Diurno</td>
+      <td>Región de Valparaíso</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>SEDE ARICA</td>
+      <td>Vespertino</td>
+      <td>Región de Arica y Parinacota</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>CASA CENTRAL (VALPARAISO)</td>
+      <td>Diurno</td>
+      <td>Región de Valparaíso</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>SEDE CASONA DE LAS CONDES</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>SEDE COQUIMBO</td>
+      <td>Diurno</td>
+      <td>Región de Coquimbo</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>CASA CENTRAL (TALCA)</td>
+      <td>Diurno</td>
+      <td>Región del Maule</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>SEDE SANTIAGO (LAS CONDES)</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>SEDE VIÑA DEL MAR - JOSE MIGUEL CARRERA</td>
+      <td>Diurno</td>
+      <td>Región de Valparaíso</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>SEDE CONCEPCION - REY BALDUINO DE BELGICA</td>
+      <td>Diurno</td>
+      <td>Región del Bío-Bío</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>SEDE IQUIQUE</td>
+      <td>Diurno</td>
+      <td>Región de Tarapacá</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>SEDE OSORNO</td>
+      <td>Diurno</td>
+      <td>Región de los Lagos</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>SEDE LOS ANGELES</td>
+      <td>Diurno</td>
+      <td>Región del Bío-Bío</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>SEDE TEMUCO</td>
+      <td>Diurno</td>
+      <td>Región de la Araucanía</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>SEDE VALDIVIA</td>
+      <td>Diurno</td>
+      <td>Región de los Ríos</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>SEDE LAS CONDES</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>SEDE PEREZ ROSALES</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>SEDE SANTO DOMINGO</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>SEDE PATAGONIA (PUERTO MONTT)</td>
+      <td>Diurno</td>
+      <td>Región de los Lagos</td>
+    </tr>
+    <tr>
+      <th>51</th>
+      <td>CASA CENTRAL (ARICA)</td>
+      <td>Diurno</td>
+      <td>Región de Arica y Parinacota</td>
+    </tr>
+    <tr>
+      <th>52</th>
+      <td>CASA CENTRAL (CONDELL)</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>53</th>
+      <td>SEDE HUECHURABA</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>54</th>
+      <td>SANTIAGO</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>55</th>
+      <td>SEDE MELIPILLA</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>56</th>
+      <td>CAMPUS SAN JOAQUIN</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>57</th>
+      <td>SEDE ALAMEDA</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>58</th>
+      <td>SEDE SAN FELIPE</td>
+      <td>Diurno</td>
+      <td>Región de Valparaíso</td>
+    </tr>
+    <tr>
+      <th>59</th>
+      <td>SEDE COPIAPO</td>
+      <td>Diurno</td>
+      <td>Región de Atacama</td>
+    </tr>
+    <tr>
+      <th>60</th>
+      <td>SEDE CURICO</td>
+      <td>Diurno</td>
+      <td>Región del Maule</td>
+    </tr>
+    <tr>
+      <th>61</th>
+      <td>SEDE MAIPU</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>62</th>
+      <td>SEDE PUENTE ALTO</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>63</th>
+      <td>SEDE SANTIAGO CENTRO</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>64</th>
+      <td>SEDE RANCAGUA</td>
+      <td>Diurno</td>
+      <td>Región del Lib. B. O´Higgins</td>
+    </tr>
+    <tr>
+      <th>65</th>
+      <td>LA SERENA</td>
+      <td>Diurno</td>
+      <td>Región de Coquimbo</td>
+    </tr>
+    <tr>
+      <th>66</th>
+      <td>SUB-CAMPUS ALMAGRO NORTE</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>67</th>
+      <td>CAMPUS SAN FELIPE</td>
+      <td>Diurno</td>
+      <td>Región de Valparaíso</td>
+    </tr>
+    <tr>
+      <th>68</th>
+      <td>SEDE SANTIAGO (S.C. APOQUINDO)</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>69</th>
+      <td>SEDE MANUEL MONTT</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>70</th>
+      <td>SEDE ORIENTE</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>71</th>
+      <td>SEDE PROVIDENCIA</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>72</th>
+      <td>CAMPUS RONDIZZONI</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>73</th>
+      <td>CASA CENTRAL (COPIAPO)</td>
+      <td>Vespertino</td>
+      <td>Región de Atacama</td>
+    </tr>
+    <tr>
+      <th>74</th>
+      <td>SEDE VALLENAR</td>
+      <td>Diurno</td>
+      <td>Región de Atacama</td>
+    </tr>
+    <tr>
+      <th>75</th>
+      <td>SEDE RENCA</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>76</th>
+      <td>SEDE MACUL</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>77</th>
+      <td>SEDE COYHAIQUE</td>
+      <td>Vespertino</td>
+      <td>Región de Aysen del G. C. Ibañez</td>
+    </tr>
+    <tr>
+      <th>78</th>
+      <td>SEDE PUNTA ARENAS</td>
+      <td>Vespertino</td>
+      <td>Región de Magallanes</td>
+    </tr>
+    <tr>
+      <th>79</th>
+      <td>SEDE MACHALI</td>
+      <td>Vespertino</td>
+      <td>Región del Lib. B. O´Higgins</td>
+    </tr>
+    <tr>
+      <th>80</th>
+      <td>CAMPUS LIMARI</td>
+      <td>Diurno</td>
+      <td>Región de Coquimbo</td>
+    </tr>
+    <tr>
+      <th>81</th>
+      <td>SEDE PEÑALOLEN</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>82</th>
+      <td>SEDE SANTIAGO SUR</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>83</th>
+      <td>SEDE LO CONTADOR</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>84</th>
+      <td>CAMPUS SANTIAGO</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>85</th>
+      <td>SEDE DEL CLAUSTRO</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>86</th>
+      <td>SEDE CAMPUS COLOSO</td>
+      <td>Diurno</td>
+      <td>Región de Antofagasta</td>
+    </tr>
+    <tr>
+      <th>87</th>
+      <td>SEDE OVALLE</td>
+      <td>Diurno</td>
+      <td>Región de Coquimbo</td>
+    </tr>
+    <tr>
+      <th>88</th>
+      <td>SEDE VILLARRICA</td>
+      <td>Diurno</td>
+      <td>Región de la Araucanía</td>
+    </tr>
+    <tr>
+      <th>89</th>
+      <td>SEDE SANTIAGO CENTRO SUR</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>90</th>
+      <td>SEDE SANTIAGO ORIENTE</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>91</th>
+      <td>CAMPUS LINARES</td>
+      <td>Diurno</td>
+      <td>Región del Maule</td>
+    </tr>
+    <tr>
+      <th>92</th>
+      <td>CAMPUS CURICO</td>
+      <td>Diurno</td>
+      <td>Región del Maule</td>
+    </tr>
+    <tr>
+      <th>93</th>
+      <td>CASA CENTRAL (ANTOFAGASTA)</td>
+      <td>A distancia</td>
+      <td>Región de Antofagasta</td>
+    </tr>
+    <tr>
+      <th>94</th>
+      <td>CAMPUS CASA CENTRAL VALPARAISO</td>
+      <td>Diurno</td>
+      <td>Región de Valparaíso</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>CAMPUS SANTIAGO SAN JOAQUIN</td>
+      <td>Vespertino</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>CAMPUS SANTIAGO VITACURA</td>
+      <td>Vespertino</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>SEDE CONSERVATORIO DE MUSICA</td>
+      <td>Diurna</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>CAMPUS BRASIL</td>
+      <td>Diurna</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>SEDE PARQUE ARRIETA</td>
+      <td>Diurna</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>100</th>
+      <td>CAMPUS SANTIAGO NORTE</td>
+      <td>Otro</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>101</th>
+      <td>SEDE LOS ANDES</td>
+      <td>Vespertina</td>
+      <td>Región de Valparaíso</td>
+    </tr>
+    <tr>
+      <th>102</th>
+      <td>SEDE TOCOPILLA</td>
+      <td>Diurna</td>
+      <td>Región de Antofagasta</td>
+    </tr>
+    <tr>
+      <th>103</th>
+      <td>SEDE SAN ANTONIO</td>
+      <td>Diurna</td>
+      <td>Región de Valparaíso</td>
+    </tr>
+    <tr>
+      <th>104</th>
+      <td>SEDE ILLAPEL</td>
+      <td>Diurna</td>
+      <td>Región de Coquimbo</td>
+    </tr>
+    <tr>
+      <th>105</th>
+      <td>SEDE LA LIGUA</td>
+      <td>Diurna</td>
+      <td>Región de Valparaíso</td>
+    </tr>
+    <tr>
+      <th>106</th>
+      <td>SEDE PUCON</td>
+      <td>Diurna</td>
+      <td>Región de la Araucanía</td>
+    </tr>
+    <tr>
+      <th>107</th>
+      <td>CENTRO UNIVERSITARIO PUERTO NATALES</td>
+      <td>Vespertina</td>
+      <td>Región de Magallanes</td>
+    </tr>
+    <tr>
+      <th>108</th>
+      <td>CENTRO UNIVERSITARIO PORVENIR</td>
+      <td>Vespertina</td>
+      <td>Región de Magallanes</td>
+    </tr>
+    <tr>
+      <th>109</th>
+      <td>COYHAIQUE</td>
+      <td>Vespertina</td>
+      <td>Región de Aysen del G. C. Ibañez</td>
+    </tr>
+    <tr>
+      <th>110</th>
+      <td>CAMPUS COLCHAGUA</td>
+      <td>Diurna</td>
+      <td>Región del Lib. B. O´Higgins</td>
+    </tr>
+    <tr>
+      <th>111</th>
+      <td>CASA CENTRAL CENTRO DE EDUCACION A DISTANCIA</td>
+      <td>A distancia</td>
+      <td>Región de Antofagasta</td>
+    </tr>
+    <tr>
+      <th>112</th>
+      <td>SEDE REPUBLICA</td>
+      <td>Diurno</td>
+      <td>Región Metropolitana</td>
+    </tr>
+    <tr>
+      <th>113</th>
+      <td>SEDE SAN FERNANDO</td>
+      <td>Diurno</td>
+      <td>Región del Lib. B. O´Higgins</td>
+    </tr>
+  </tbody>
+</table>
