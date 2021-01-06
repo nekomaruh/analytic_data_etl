@@ -6,7 +6,7 @@ data_depe = [[1, 'Corporación Municipal'],
                  [3, 'Particular Subvencionado'],
                  [4, 'Particular Pagado (o no subvencionado)'],
                  [5, 'Corporación de Administración Delegada (DL 3166)'],
-                 [6, '6: Servicio Local de Educación']]
+                 [6, 'Servicio Local de Educación']]
 
 # Inicializamos la lista de regiones
 data_region = [[1, 'Región de Tarapacá', 'TPCA'], 
@@ -106,17 +106,23 @@ data_ense = [
 [410, 'Enseñanza Media T-P Comercial Niños y Jóvenes'],
 [460, 'Educación Media T-P Comercial Adultos (Decreto N° 152/1989)'],
 [461, 'Educación Media T-P Comercial Adultos (Decreto N° 152/1989)'],
-[463, 'Educación Media T-P Comercial Adultos (Decreto N° 1000/2009) 510 Enseñanza Media T-P Industrial Niños y Jóvenes'],
+[463, 'Educación Media T-P Comercial Adultos (Decreto N° 1000/2009)'],
+[510, 'Enseñanza Media T-P Industrial Niños y Jóvenes'],
 [560, 'Educación Media T-P Industrial Adultos (Decreto N° 152/1989)'],
 [561, 'Educación Media T-P Industrial Adultos (Decreto N° 152/1989)'],
-[563, 'Educación Media T-P Industrial Adultos (Decreto N° 1000/2009) 610 Enseñanza Media T-P Técnica Niños y Jóvenes'],
+[563, 'Educación Media T-P Industrial Adultos (Decreto N° 1000/2009)'],
+[610, 'Enseñanza Media T-P Técnica Niños y Jóvenes'],
 [660, 'Educación Media T-P Técnica Adultos (Decreto N° 152/1989)'],
 [661, 'Educación Media T-P Técnica Adultos (Decreto N° 152/1989)'],
-[663, 'Educación Media T-P Técnica Adultos (Decreto N° 1000/2009) 710 Enseñanza Media T-P Agrícola Niños y Jóvenes'],
+[663, 'Educación Media T-P Técnica Adultos (Decreto N° 1000/2009)'],
+[710, 'Enseñanza Media T-P Agrícola Niños y Jóvenes'],
 [760, 'Educación Media T-P Agrícola Adultos (Decreto N° 152/1989)'],
 [761, 'Educación Media T-P Agrícola Adultos (Decreto N° 152/1989)'],
-[763, 'Educación Media T-P Agrícola Adultos (Decreto N° 1000/2009) 810 Enseñanza Media T-P Marítima Niños y Jóvenes'],
-[860, 'Enseñanza Media T-P Marítima Adultos (Decreto N° 152/1989) 863 Enseñanza Media T-P Marítima Adultos (Decreto N° 1000/2009) 910 Enseñanza Media Artística Niños y Jóvenes'],
+[763, 'Educación Media T-P Agrícola Adultos (Decreto N° 1000/2009)'],
+[810, 'Enseñanza Media T-P Marítima Niños y Jóvenes'],
+[860, 'Enseñanza Media T-P Marítima Adultos (Decreto N° 152/1989)'],
+[863, 'Enseñanza Media T-P Marítima Adultos (Decreto N° 1000/2009)'],
+[910, 'Enseñanza Media Artística Niños y Jóvenes'],
 [963, 'Enseñanza Media Artística Adultos']]
 
 # Inicializamos la lista de grado por tipo de enseñanza
