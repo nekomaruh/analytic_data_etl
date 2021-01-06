@@ -1,11 +1,5 @@
 import pandas as pd
-#import sqlalchemy
-#import psycopg2
-import numpy as np
-import re
 import time
-
-#from static_tables import *
 
 start_time = time.time()
 
@@ -20,19 +14,30 @@ def read_file(year, drops):
     df = df.drop(columns=drops)
     return df
 
-# Leemos los archivos
-df_2010 = read_file(year=2010, drops=['COD_SEC', 'COD_ESPE', 'INT_ALU'])
-#df_2011 = read_file(year=2011, drops=['COD_SEC', 'COD_ESPE', 'INT_ALU', 'FEC_ING_ALU'])
-#df_2012 = read_file(year=2012, drops=['COD_SEC', 'COD_ESPE', 'INT_ALU'])
 
-# Exportamos archivos html para ver si las tablas están bien
-#html_2010 = df_2010.to_html("df_2010.html")
+import static_tables as st
+import queries as q
 
+if __name__ == "__main__":
 
-#print(df_2010)
-
-for col in df_2010.columns: 
-    print(col)
+    q.create_static_tables() # Crea las tablas estáticas
     
-print('Termino')
+    # Inserta los valores a las tablas estáticas
+    q.insert_dim_depe(st.data_depe)
+    q.insert_dim_region(st.data_region)
+    q.insert_dim_provincia(st.data_provincia)
+    
+    
+    # Leemos los archivos
+    df_2010 = read_file(year=2010, drops=['COD_SEC', 'COD_ESPE', 'INT_ALU'])
+    #df_2011 = read_file(year=2011, drops=['COD_SEC', 'COD_ESPE', 'INT_ALU', 'FEC_ING_ALU'])
+    #df_2012 = read_file(year=2012, drops=['COD_SEC', 'COD_ESPE', 'INT_ALU'])
 
+    # Exportamos archivos html para ver si las tablas están bien
+    #html_2010 = df_2010.to_html("df_2010.html")
+
+    for col in df_2010.columns: 
+        print(col)
+        
+    print('Termino')
+    

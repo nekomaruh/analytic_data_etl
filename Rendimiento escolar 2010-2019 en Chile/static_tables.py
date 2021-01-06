@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Inicializamos la lista de dependencia establecimientos
-data_cod_depe = [[1, 'Corporación Municipal'], 
+data_depe = [[1, 'Corporación Municipal'], 
                  [2, 'Municipal DAEM'], 
                  [3, 'Particular Subvencionado'],
                  [4, 'Particular Pagado (o no subvencionado)'],
@@ -10,21 +10,21 @@ data_cod_depe = [[1, 'Corporación Municipal'],
 
 # Inicializamos la lista de regiones
 data_region = [[1, 'Región de Tarapacá', 'TPCA'], 
-                 [2, 'Región de Antofagasta', 'ANTOF'],
-                 [3, 'Región de Atacama', 'ATCMA'],
-                 [4, 'Región de Coquimbo', 'COQ'],
-                 [5, 'Región de Valparaíso', 'VALPO'],
-                 [6, 'Región del Libertador Gral. Bernardo O’Higgins', 'LGBO'],
-                 [7, 'Región del Maule', 'MAULE'],
-                 [8, 'Región del Biobío','BBIO'],
-                 [9, 'Región de la Araucanía', 'ARAUC'],
-                 [10, 'Región de Los Lagos', 'LAGOS'],
-                 [11, 'Región de Aysén del Gral. Carlos Ibáñez del Campo', 'AYSEN'],
-                 [12, 'Región de Magallanes y de la Antártica Chilena', 'MAG'],
-                 [13, 'Región Metropolitana de Santiago', 'RM'],
-                 [14, 'Región de Los Ríos', 'RIOS'],
-                 [15, 'Región de Arica y Parinacota', 'AYP'],
-                 [16, 'Región de Ñuble', 'NUBLE']]
+                [2, 'Región de Antofagasta', 'ANTOF'],
+                [3, 'Región de Atacama', 'ATCMA'],
+                [4, 'Región de Coquimbo', 'COQ'],
+                [5, 'Región de Valparaíso', 'VALPO'],
+                [6, 'Región del Libertador Gral. Bernardo O’Higgins', 'LGBO'],
+                [7, 'Región del Maule', 'MAULE'],
+                [8, 'Región del Biobío','BBIO'],
+                [9, 'Región de la Araucanía', 'ARAUC'],
+                [10, 'Región de Los Lagos', 'LAGOS'],
+                [11, 'Región de Aysén del Gral. Carlos Ibáñez del Campo', 'AYSEN'],
+                [12, 'Región de Magallanes y de la Antártica Chilena', 'MAG'],
+                [13, 'Región Metropolitana de Santiago', 'RM'],
+                [14, 'Región de Los Ríos', 'RIOS'],
+                [15, 'Región de Arica y Parinacota', 'AYP'],
+                [16, 'Región de Ñuble', 'NUBLE']]
 
 # Inicializamos la lista de provincias
 data_provincia = [
@@ -84,12 +84,11 @@ data_provincia = [
 [15, 152, 'Provincia de Parinacota'],        
 [16, 161, 'Provincia de Diguillin'],
 [16, 162, 'Provincia de Itata'],
-[16, 163, 'Provincia de Punilla'],
-]
+[16, 163, 'Provincia de Punilla']]
 
 # Inicializamos la lista de indice de ruralidad
 data_rural_rbd = [[0, 'Urbano'], 
-                 [1, 'Rural']] 
+                  [1, 'Rural']] 
 
 # Inicializamos la lista de tipo de enseñanza
 data_ense = [
@@ -235,32 +234,36 @@ data_grado = [
 [910, 3, '3o medio'],
 [910, 4, '4o medio'],
 [963, 3, 'Segundo nivel (3o medio)'],
-[963, 4, 'Tercero nivel (4o medio)']
-]
+[963, 4, 'Tercero nivel (4o medio)']]
 
 # Inicializamos la lista de géneros
 data_genero = [[0, 'Sin Información'], 
-                 [1, 'Masculino'],
-                 [2, 'Femenino']] 
+               [1, 'Masculino'],
+               [2, 'Femenino']] 
 
 # Aqui va COD_COM_ALU
 
 # Inicializamos la lista de situacion final
 data_sit_fin = [['P', 'Promovido'], 
-                 ['R', 'Reprobado'],
-                 ['Y', 'Retirado'],
-                 ['en blanco', 'Sin información']] 
+                ['R', 'Reprobado'],
+                ['Y', 'Retirado'],
+                ['-', 'Sin información']] 
 
 # Inicializamos la lista de situacion final con traslado
 data_sit_fin_t = [['P', 'Promovido'], 
-                 ['R', 'Reprobado'],
-                 ['Y', 'Retirado'],
-                 ['T', 'Trasladado'],
-                 ['en blanco', 'Sin información']] 
+                ['R', 'Reprobado'],
+                ['Y', 'Retirado'],
+                ['T', 'Trasladado'],
+                ['en blanco', 'Sin información']] 
 
+data_jornada = [[1, 'Mañana'],
+                [2, 'Tarde'],
+                [3, 'Mañana y tarde'],
+                [4, 'Vespertina / Nocturna']]
 
+"""
 # Creamos los dataframes
-df_cod_depe = pd.DataFrame(data_cod_depe, columns = ['COD_DEPE', 'DEPENDENCIA_ESTABLECIMIENTO'])
+df_depe = pd.DataFrame(data_depe, columns = ['COD_DEPE', 'DEPENDENCIA_ESTABLECIMIENTO'])
 df_region = pd.DataFrame(data_region, columns = ['COD_REG_RBD', 'REGION', 'REGION_ABREVIADO'])
 df_provincia = pd.DataFrame(data_provincia, columns = ['COD_REG_RBD', 'COD_PRO_RBD', 'PROVINCIA'])
 df_rural_rbd = pd.DataFrame(data_rural_rbd, columns = ['RURAL_RBD', 'INDICE_RURALIDAD'])
@@ -270,6 +273,11 @@ df_genero = pd.DataFrame(data_genero, columns = ['GEN_ALU', 'GENERO'])
 # Aqui va COD_COM_ALU
 df_sit_fin = pd.DataFrame(data_sit_fin, columns = ['SIT_FIN', 'SITUACION_CIERRE'])
 df_sit_fin_t = pd.DataFrame(data_sit_fin_t, columns = ['SIT_FIN_R', 'SITUACION_CIERRE_TRASLADADO'])
+df_jornada = pd.DataFrame(data_jornada, columns=['COD_JOR', 'JORNADA'])
+"""
 
 
-print(df_sit_fin_t)
+# La tabla de comuna hay que autogenerarla 
+# Con los datos que tenemos en el dataset
+
+#print(df_jornada)
