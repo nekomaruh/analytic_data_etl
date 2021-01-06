@@ -128,3 +128,24 @@ def insert_dim_grado(list):
         dim_grado(COD_ENSE, COD_GRADO, NOMBRE_GRADO)
         values(%s,%s,%s)""",(i[0], i[1], i[2]))
     connection.commit()
+
+def insert_dim_genero(list):
+    for i in list:
+        cursor.execute("""insert into
+        dim_genero(GEN_ALU, GENERO)
+        values(%s,%s)""",(i[0], i[1]))
+    connection.commit()
+
+def insert_dim_sit_fin(list):
+    for i in list:
+        cursor.execute("""insert into
+        dim_sit_fin(SIT_FIN, SITUACION_CIERRE)
+        values(%s,%s)""",(i[0], i[1]))
+    connection.commit()
+
+def insert_dim_jornada(list):
+    for i in list:
+        cursor.execute("""insert into
+        dim_jornada(COD_JOR, JORNADA)
+        values(%s,%s)""",(i[0], i[1]))
+    connection.commit()

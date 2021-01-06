@@ -254,14 +254,14 @@ data_genero = [[0, 'Sin Información'],
 data_sit_fin = [['P', 'Promovido'], 
                 ['R', 'Reprobado'],
                 ['Y', 'Retirado'],
-                ['-', 'Sin información']] 
+                ['en blanco', 'Sin información']] 
 
 # Inicializamos la lista de situacion final con traslado
 data_sit_fin_t = [['P', 'Promovido'], 
                 ['R', 'Reprobado'],
                 ['Y', 'Retirado'],
                 ['T', 'Trasladado'],
-                ['en blanco', 'Sin información']] 
+                ['B', 'Sin información']] 
 
 data_jornada = [[1, 'Mañana'],
                 [2, 'Tarde'],
