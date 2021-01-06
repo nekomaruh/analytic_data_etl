@@ -121,6 +121,7 @@ data_ense = [
 [763, 'Educación Media T-P Agrícola Adultos (Decreto N° 1000/2009)'],
 [810, 'Enseñanza Media T-P Marítima Niños y Jóvenes'],
 [860, 'Enseñanza Media T-P Marítima Adultos (Decreto N° 152/1989)'],
+[861, '-'],
 [863, 'Enseñanza Media T-P Marítima Adultos (Decreto N° 1000/2009)'],
 [910, 'Enseñanza Media Artística Niños y Jóvenes'],
 [963, 'Enseñanza Media Artística Adultos']]
