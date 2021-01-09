@@ -121,7 +121,7 @@ data_ense = [
 [763, 'Educación Media T-P Agrícola Adultos (Decreto N° 1000/2009)'],
 [810, 'Enseñanza Media T-P Marítima Niños y Jóvenes'],
 [860, 'Enseñanza Media T-P Marítima Adultos (Decreto N° 152/1989)'],
-[861, '-'],
+[861, 'Enseñanza Media T-P Marítima Adultos (Decreto N° 152/1989)'], # No existe esta fila en la documentación por ende deducimos similaridad con las anteriores
 [863, 'Enseñanza Media T-P Marítima Adultos (Decreto N° 1000/2009)'],
 [910, 'Enseñanza Media Artística Niños y Jóvenes'],
 [963, 'Enseñanza Media Artística Adultos']]
@@ -371,12 +371,12 @@ data_espe = [
     [930, 93007, 'Monitoría de Danza']]
 
 data_ense2 = [
-    [2, 'Enseñanza Básica Niños.'],
-    [3, 'Educación Básica Adultos.'],
-    [5, 'Enseñanza Media Humanístico Científica Jóvenes.'],
-    [6, 'Educación Media Humanístico Científica Adultos.'],
-    [7, 'Enseñanza Media Técnico Profesional y Artística, Jóvenes.'],
-    [8, 'Educación Media Técnico Profesional y Artística, Adultos.']]
+    [2, 'Enseñanza Básica Niños'],
+    [3, 'Educación Básica Adultos'],
+    [5, 'Enseñanza Media Humanístico Científica Jóvenes'],
+    [6, 'Educación Media Humanístico Científica Adultos'],
+    [7, 'Enseñanza Media Técnico Profesional y Artística, Jóvenes'],
+    [8, 'Educación Media Técnico Profesional y Artística, Adultos']]
 
 """
 # Creamos los dataframes
@@ -396,7 +396,6 @@ df_jornada = pd.DataFrame(data_jornada, columns=['COD_JOR', 'JORNADA'])
 # espe = [COD_SEC, COD_ESPE, ESPECIALIDAD]
 # ense2 = [COD_ENSE2, DESCRIPCION]
 """
-
 
 # La tabla de comuna hay que autogenerarla 
 # Con los datos que tenemos en el dataset
