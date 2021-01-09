@@ -8,6 +8,18 @@ connection = ps.connect(user="postgres",
 
 cursor = connection.cursor()
 
+def drop_static_tables():
+    cursor.execute("DROP TABLE IF EXISTS dim_jornada;")
+    cursor.execute("DROP TABLE IF EXISTS dim_sit_fin;")
+    cursor.execute("DROP TABLE IF EXISTS dim_genero;")
+    cursor.execute("DROP TABLE IF EXISTS dim_grado;")
+    cursor.execute("DROP TABLE IF EXISTS dim_ense;")
+    cursor.execute("DROP TABLE IF EXISTS dim_rural;")
+    cursor.execute("DROP TABLE IF EXISTS dim_provincia;")
+    cursor.execute("DROP TABLE IF EXISTS dim_region;")
+    cursor.execute("DROP TABLE IF EXISTS dim_depe;")
+    connection.commit()
+
 def create_static_tables():
     
     # Tabla dependencia
@@ -24,7 +36,7 @@ def create_static_tables():
     
     # Tabla provincia
     cursor.execute("""CREATE TABLE IF NOT EXISTS dim_provincia(
-                        COD_REG_RBD INTEGER NOT NULL UNIQUE,
+                        COD_REG_RBD INTEGER NOT NULL,
                         COD_PRO_RBD INTEGER NOT NULL UNIQUE,
                         PROVINCIA TEXT NOT NULL,
                         primary key(COD_REG_RBD, COD_PRO_RBD),
@@ -45,8 +57,8 @@ def create_static_tables():
     
     # Tabla grado
     cursor.execute("""CREATE TABLE IF NOT EXISTS dim_grado(
-                        COD_ENSE INTEGER NOT NULL UNIQUE,
-                        COD_GRADO INTEGER NOT NULL UNIQUE,
+                        COD_ENSE INTEGER NOT NULL,
+                        COD_GRADO INTEGER NOT NULL,
                         NOMBRE_GRADO TEXT NOT NULL,
                         primary key(COD_ENSE, COD_GRADO),
                         foreign key(COD_ENSE) references dim_ense(COD_ENSE)
@@ -122,7 +134,28 @@ def insert_dim_region(list):
 def insert_dim_provincia(list):
     for i in list:
         cursor.execute("""insert into
-        dim_region(COD_REG_RBD, COD_PRO_RBD, PROVINCIA)
+        dim_provincia(COD_REG_RBD, COD_PRO_RBD, PROVINCIA)
+        values(%s,%s,%s)""",(i[0], i[1], i[2]))
+    connection.commit()
+
+def insert_dim_rural(list):
+    for i in list:
+        cursor.execute("""insert into
+        dim_rural(RURAL_RBD, INDICE_RURALIDAD)
+        values(%s,%s)""",(i[0], i[1]))
+    connection.commit()
+
+def insert_dim_ense(list):
+    for i in list:
+        cursor.execute("""insert into
+        dim_ense(COD_ENSE, DESCRIPCION)
+        values(%s,%s)""",(i[0], i[1]))
+    connection.commit()
+
+def insert_dim_grado(list):
+    for i in list:
+        cursor.execute("""insert into
+        dim_grado(COD_ENSE, COD_GRADO, NOMBRE_GRADO)
         values(%s,%s,%s)""",(i[0], i[1], i[2]))
     connection.commit()
     
