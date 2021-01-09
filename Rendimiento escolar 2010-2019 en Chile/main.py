@@ -23,12 +23,9 @@ def read_file(year, drops):
     ram(info=ram_info)
     return df
 
-df_2010 = read_file(year=2010, drops=['COD_SEC', 'COD_ESPE'])
-
 def insert_dimensions():
     q.drop_static_tables() # Elimina las tablas estáticas si existen
     q.create_static_tables() # Crea las tablas estáticas
-
     # Inserta los valores a las tablas estáticas
     q.insert_dim_depe(st.data_depe)
     q.insert_dim_region(st.data_region)
@@ -54,6 +51,7 @@ if __name__ == "__main__":
     ram(info='Delete imports')
 
     # Leemos los archivos
+    """
     df_2010 = read_file(year=2010, drops=['COD_SEC', 'COD_ESPE'])
     df_2011 = read_file(year=2011, drops=['COD_SEC', 'COD_ESPE', 'FEC_ING_ALU'])
     df_2012 = read_file(year=2012, drops=['COD_SEC', 'COD_ESPE'])
@@ -64,10 +62,11 @@ if __name__ == "__main__":
     df_2017 = read_file(year=2017, drops=['COD_SEC', 'COD_ESPE'])
     df_2018 = read_file(year=2018, drops=['COD_SEC', 'COD_ESPE'])
     df_2019 = read_file(year=2019, drops=['COD_SEC', 'COD_ESPE'])
+    """
 
     ram(info='Final ram usage 2010-2019')
 
-    del df_2010, df_2011, df_2012, df_2013, df_2014, df_2015, df_2016, df_2017, df_2018, df_2019
+    #del df_2010, df_2011, df_2012, df_2013, df_2014, df_2015, df_2016, df_2017, df_2018, df_2019
     # Exportamos archivos html para ver si las tablas están bien
     #html_2010 = df_2010.to_html("df_2010.html")
 

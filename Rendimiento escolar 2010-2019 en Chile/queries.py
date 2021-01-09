@@ -191,8 +191,8 @@ def insert_dim_genero(list):
 def insert_dim_sit_fin(list):
     for i in list:
         cursor.execute("""insert into
-        dim_genero(SIT_FIN, SITUACION_CIERRE)
-        values(%s,%s)""",(i[0], i[1]))
+        dim_sit_fin(SIT_FIN, SITUACION_CIERRE)
+        values(%s,%s,%s)""",(i[0], i[1],i[2]))
     connection.commit()
     
 def insert_dim_jornada(list):
