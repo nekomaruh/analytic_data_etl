@@ -247,19 +247,129 @@ data_genero = [[0, 'Sin Información'],
 data_sit_fin = [['P', 'Promovido'], 
                 ['R', 'Reprobado'],
                 ['Y', 'Retirado'],
-                ['-', 'Sin información']] 
+                ['-', 'Sin información']] # RENAME 'null' TO '-'
 
 # Inicializamos la lista de situacion final con traslado
 data_sit_fin_t = [['P', 'Promovido'], 
                 ['R', 'Reprobado'],
                 ['Y', 'Retirado'],
                 ['T', 'Trasladado'],
-                ['en blanco', 'Sin información']] 
+                ['-', 'Sin información']]
 
 data_jornada = [[1, 'Mañana'],
                 [2, 'Tarde'],
                 [3, 'Mañana y tarde'],
                 [4, 'Vespertina / Nocturna']]
+
+## Estas hay que agregarlas 
+data_int_alu = [
+    [0, 'No'],
+    [1, 'Sí'],
+    [2, 'Sin Información']] # RENAME '.' TO '2'
+
+data_sec = [
+    [0, 'Ciclo General / Sin información'],
+    [410, 'Administración y Comercio'],
+    [510, 'Construcción'],
+    [520, 'Metalmecánico'],
+    [530, 'Electricidad'],
+    [540, 'Minero'],
+    [550, 'Gráfica'],
+    [560, 'Químico'],
+    [570, 'Confección'],
+    [580, 'Tecnología y Telecomunicaciones'],
+    [610, 'Alimentación'],
+    [620, 'Programas y Proyectos Sociales'],
+    [630, 'Hotelería y Turismo'],
+    [640, 'Salud y Educación'],
+    [710, 'Maderero'],
+    [720, 'Agropecuario'],
+    [810, 'Marítimo'],
+    [910, 'Artes Visuales'],
+    [920, 'Artes Escénicas Teatro'],
+    [930, 'Artes Escénicas Danza']]
+
+data_espe = [
+    [0, 0, 'Ciclo General / Sin información'],
+    [410, 41001, 'Administración'],
+    [410, 41002, 'Contabilidad'],
+    [410, 41003, 'Secretariado'],
+    [410, 41004, 'Ventas'],
+    [410, 41005, 'Administración (con mención)'],
+    [510, 51001, 'Edificación'],
+    [510, 51002, 'Terminaciones de Construcción'],
+    [510, 51003, 'Montaje Industrial'],
+    [510, 51004, 'Obras viales y de infraestructura'],
+    [510, 51005, 'Instalaciones Sanitarias'],
+    [510, 51006, 'Refrigeración y climatización'],
+    [510, 51008, 'Instalaciones Sanitarias'],
+    [510, 51009, 'Construcción (con mención)'],
+    [520, 52008, 'Mecánica Industrial'],
+    [520, 52009, 'Construcciones Metálicas'],
+    [520, 52010, 'Mecánica Automotriz'],
+    [520, 52011, 'Matricería'],
+    [520, 52012, 'Mecánica de mantención de aeronaves'],
+    [520, 52013, 'Mecánica Industrial (con mención)'],
+    [530, 53014, 'Electricidad'],
+    [530, 53015, 'Electrónica'],
+    [530, 53016, 'Telecomunicaciones'],
+    [540, 54018, 'Explotación minera'],
+    [540, 54019, 'Metalurgia Extractiva'],
+    [540, 54020, 'Asistencia en geología'],
+    [550, 55022, 'Gráfica'],
+    [550, 55023, 'Dibujo Técnico'],
+    [560, 56025, 'Operación de planta química'],
+    [560, 56026, 'Laboratorio químico'],
+    [560, 56027, 'Química Industrial (con mención)'],
+    [570, 57028, 'Tejido'],
+    [570, 57029, 'Textil'],
+    [570, 57030, 'Vestuario y Confección Textil'],
+    [570, 57031, 'Productos del cuero'],
+    [580, 58033, 'Conectividad y Redes'],
+    [580, 58034, 'Programación'],
+    [580, 58035, 'Telecomunicaciones'],
+    [610, 61001, 'Elaboración Industrial de Alimentos'],
+    [610, 61002, 'Servicio de Alimentación Colectiva'],
+    [610, 61003, 'Gastronomía (con mención)'],
+    [620, 62004, 'Atención de párvulos'],
+    [620, 62005, 'Atención de adultos mayores'],
+    [620, 62006, 'Atención de Enfermería'],
+    [620, 62007, 'Atención Social y Recreativa'],
+    [620, 62008, 'Atención de Enfermería (con mención)'],
+    [630, 63009, 'Servicio de turismo'],
+    [630, 63010, 'Servicios Hoteleros'],
+    [630, 63011, 'Servicio de hotelería'],
+    [640, 64001, 'Atención de párvulos'],
+    [640, 64008, 'Atención de Enfermería (con mención)'],
+    [710, 71001, 'Forestal'],
+    [710, 71002, 'Procesamiento de la madera'],
+    [710, 71003, 'Productos de la madera'],
+    [710, 71004, 'Celulosa y Papel'],
+    [710, 71005, 'Muebles y Terminaciones de la Madera'],
+    [720, 72006, 'Agropecuaria'],
+    [720, 72007, 'Agropecuaria (con mención)'],
+    [810, 81001, 'Naves mercantes y especiales'],
+    [810, 81002, 'Pesquería'],
+    [810, 81003, 'Acuicultura'],
+    [810, 81004, 'Operación portuaria'],
+    [810, 81005, 'Tripulación naves mercantes y especiales'],
+    [910, 91001, 'Artes Visuales'],
+    [910, 91002, 'Artes Audiovisuales'],
+    [910, 91003, 'Diseño'],
+    [910, 91004, 'Antes Musicales'],
+    [910, 91005, 'Artes Escénicas'],
+    [920, 92004, 'Interpretación Teatral'],
+    [920, 92005, 'Diseño Escénico'],
+    [930, 93006, 'Interpretación en Danza de Nivel Intermedio'],
+    [930, 93007, 'Monitoría de Danza']]
+
+data_ense2 = [
+    [2, 'Enseñanza Básica Niños.'],
+    [3, 'Educación Básica Adultos.'],
+    [5, 'Enseñanza Media Humanístico Científica Jóvenes.'],
+    [6, 'Educación Media Humanístico Científica Adultos.'],
+    [7, 'Enseñanza Media Técnico Profesional y Artística, Jóvenes.'],
+    [8, 'Educación Media Técnico Profesional y Artística, Adultos.']]
 
 """
 # Creamos los dataframes
@@ -274,6 +384,10 @@ df_genero = pd.DataFrame(data_genero, columns = ['GEN_ALU', 'GENERO'])
 df_sit_fin = pd.DataFrame(data_sit_fin, columns = ['SIT_FIN', 'SITUACION_CIERRE'])
 df_sit_fin_t = pd.DataFrame(data_sit_fin_t, columns = ['SIT_FIN_R', 'SITUACION_CIERRE_TRASLADADO'])
 df_jornada = pd.DataFrame(data_jornada, columns=['COD_JOR', 'JORNADA'])
+# int_alu = [INT_ALU, INDICADOR]
+# sec = [COD_SEC, SECTOR_ECONOMICO]
+# espe = [COD_SEC, COD_ESPE, ESPECIALIDAD]
+# ense2 = [COD_ENSE2, DESCRIPCION]
 """
 
 

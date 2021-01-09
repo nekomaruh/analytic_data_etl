@@ -70,11 +70,41 @@ def create_static_tables():
                         JORNADA TEXT NOT NULL
                     );""")
     
+    # Tabla int alu (REVISAR HACIA ABAJO)
+    cursor.execute("""CREATE TABLE IF NOT EXISTS dim_int_alu(
+                        INT_ALU INTEGER PRIMARY KEY NOT NULL UNIQUE,
+                        INDICADOR TEXT NOT NULL
+                    );""")
+    
+    # Tabla sctor economico
+    cursor.execute("""CREATE TABLE IF NOT EXISTS dim_sec(
+                        COD_SEC INTEGER PRIMARY KEY NOT NULL UNIQUE,
+                        SECTOR_ECONOMICO TEXT NOT NULL
+                    );""")
+    
+    # Tabla especialidad
+    cursor.execute("""CREATE TABLE IF NOT EXISTS dim_especialidad(
+                        COD_SEC INTEGER NOT NULL,
+                        COD_ESPE INTEGER NOT NULL UNIQUE,
+                        ESPECIIALIDAD TEXT NOT NULL,
+                        primary key(COD_SEC, COD_ESPE),
+                        foreign key(COD_SEC) references dim_sec(COD_SEC)
+                    );""")
+    
+    cursor.execute("""CREATE TABLE IF NOT EXISTS dim_ense2(
+                        COD_ENSE2 INTEGER PRIMARY KEY NOT NULL UNIQUE,
+                        DESCRIPCION TEXT NOT NULL
+                    );""")
+    
     connection.commit()
+    print("Tables added successfully!")
     
-    print("Tablas agregadas correctamente!")
-    
-    
+def create_tables():
+    cursor.execute("""CREATE TABLE IF NOT EXISTS dim_alumno(
+                        COD_ENSE2 INTEGER PRIMARY KEY NOT NULL UNIQUE,
+                        DESCRIPCION TEXT NOT NULL
+                    );""")
+
 def insert_dim_depe(list):
     for i in list:
         cursor.execute("""insert into
@@ -93,5 +123,69 @@ def insert_dim_provincia(list):
     for i in list:
         cursor.execute("""insert into
         dim_region(COD_REG_RBD, COD_PRO_RBD, PROVINCIA)
+        values(%s,%s,%s)""",(i[0], i[1], i[2]))
+    connection.commit()
+    
+# Agregar en main
+def insert_dim_rural(list):
+    for i in list:
+        cursor.execute("""insert into
+        dim_rural(RURAL_RBD, INDICE_RURALIDAD)
+        values(%s,%s)""",(i[0], i[1]))
+    connection.commit()
+
+def insert_dim_ense(list):
+    for i in list:
+        cursor.execute("""insert into
+        dim_ense(COD_ENSE, DESCRIPCION)
+        values(%s,%s)""",(i[0], i[1]))
+    connection.commit()
+
+def insert_dim_grado(list):
+    for i in list:
+        cursor.execute("""insert into
+        dim_grado(COD_ENSE, COD_GRADO, NOMBRE_GRADO)
+        values(%s,%s,%s)""",(i[0], i[1], i[2]))
+    connection.commit()
+
+def insert_dim_genero(list):
+    for i in list:
+        cursor.execute("""insert into
+        dim_genero(GEN_ALU, GENERO)
+        values(%s,%s)""",(i[0], i[1]))
+    connection.commit()
+
+def insert_dim_sit_fin(list):
+    for i in list:
+        cursor.execute("""insert into
+        dim_genero(SIT_FIN, SITUACION_CIERRE)
+        values(%s,%s)""",(i[0], i[1]))
+    connection.commit()
+    
+def insert_dim_jornada(list):
+    for i in list:
+        cursor.execute("""insert into
+        dim_genero(COD_JOR, JORNADA)
+        values(%s,%s)""",(i[0], i[1]))
+    connection.commit()
+    
+def insert_dim_int_alu(list):
+    for i in list:
+        cursor.execute("""insert into
+        dim_int_alu(INT_ALU, INDICADOR)
+        values(%s,%s)""",(i[0], i[1]))
+    connection.commit()
+    
+def insert_dim_sec(list):
+    for i in list:
+        cursor.execute("""insert into
+        dim_sec(COD_SEC, SECTOR_ECONOMICO)
+        values(%s,%s)""",(i[0], i[1]))
+    connection.commit()
+
+def insert_dim_espe(list):
+    for i in list:
+        cursor.execute("""insert into
+        dim_sec(COD_SEC, COD_ESPE, ESPECIALIDAD)
         values(%s,%s,%s)""",(i[0], i[1], i[2]))
     connection.commit()

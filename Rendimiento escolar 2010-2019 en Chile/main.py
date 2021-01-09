@@ -14,6 +14,7 @@ def read_file(year, drops):
     df = df.drop(columns=drops)
     return df
 
+df_2010 = read_file(year=2010, drops=['COD_SEC', 'COD_ESPE'])
 
 import static_tables as st
 import queries as q
