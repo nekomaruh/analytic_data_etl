@@ -7,3 +7,7 @@ select * from dim_grado
 select * from dim_genero
 select * from dim_sit_fin
 select * from dim_jornada
+select * from dim_int_alu
+select * from dim_sec
+select * from dim_espe
+select * from dim_ense2
