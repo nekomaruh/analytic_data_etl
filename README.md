@@ -4,6 +4,7 @@ SIES (Information Service of Superior Education)
 Relational database transformed to multidimensional OLAP cube, to improve report performance and retrieve insights information about students schools and careers in Chile.
 
 - This dataset collects data from years from 2014 to 2018.
+- Related to "Sies BI - Multidimensional" folder.
 
 Database design
 ----
