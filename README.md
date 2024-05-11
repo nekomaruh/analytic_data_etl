@@ -3,6 +3,11 @@ SIES (Information Service of Superior Education)
 
 Relational database transformed to multidimensional OLAP cube, to improve report performance and retrieve insights information about students schools and careers in Chile.
 
+- This dataset collects data from years from 2014 to 2018.
+
+Database design
+----
+
 <img width="564" alt="Captura de pantalla 2024-05-11 a la(s) 00 42 06" src="https://github.com/nekomaruh/analytic_data_etl/assets/42304227/ffbb387e-edb1-4ce0-9879-66303b92d5b6">
 
 Insights Collected
